@@ -333,6 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ragDollActive: 0
+  _launchStrength: 25
+  _ragdollTorso: {fileID: 1515084986}
 --- !u!1 &370664678
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +660,7 @@ GameObject:
   - component: {fileID: 374015805}
   - component: {fileID: 374015804}
   - component: {fileID: 374015803}
+  - component: {fileID: 374015806}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -732,13 +735,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374015802}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.134087, y: -0, z: -0, w: 0.9909696}
+  m_LocalRotation: {x: 0.134087, y: -1.1368684e-13, z: 3.125649e-16, w: 0.9909696}
   m_LocalPosition: {x: 0, y: 4.55, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 15.412, y: 0, z: 0}
+--- !u!114 &374015806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374015802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd73beae9dcc4409b72058de0ca023f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1515084985}
+  _camOffset: {x: 0, y: 3, z: -5}
 --- !u!1 &1411437798
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +877,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1515084985 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6514458758580931651, guid: d49a31b7ad7da48d580323fd557296c5, type: 3}
+  m_PrefabInstance: {fileID: 3564908758398147743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1515084986 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3707355919570258037, guid: d49a31b7ad7da48d580323fd557296c5, type: 3}
+  m_PrefabInstance: {fileID: 3564908758398147743}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1839637413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1601121431300107479, guid: d49a31b7ad7da48d580323fd557296c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.23
+      value: 0.057
       objectReference: {fileID: 0}
     - target: {fileID: 1601121431300107479, guid: d49a31b7ad7da48d580323fd557296c5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1293,8 +1320,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 374015805}
   - {fileID: 1839637415}
   - {fileID: 370664684}
+  - {fileID: 374015805}
   - {fileID: 3564908758398147743}
   - {fileID: 1411437803}

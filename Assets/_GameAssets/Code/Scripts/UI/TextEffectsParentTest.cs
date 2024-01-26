@@ -6,10 +6,20 @@ using Sirenix.OdinInspector;
 public class TextEffectsParentTest : MonoBehaviour
 {
     [Button]
-    public GameObject CreateText(string id, string text)
+    public GameObject CreateText(string text, string id)
     {
-        if (id == null)
+        if (string.IsNullOrWhiteSpace(id))
             id = "DefaultTextEffect";
+        if (string.IsNullOrWhiteSpace(text))
+            text = "TEST!!";
         return TextEffectManager.instance.CreateText(id, text);
+    }
+
+    [Button]
+    public GameObject CreateSplatText(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            text = "TEST!!";
+        return TextEffectManager.instance.CreateText("SplatTextEffect", text, TextEffectManager.AnimStyle.Splat);
     }
 }

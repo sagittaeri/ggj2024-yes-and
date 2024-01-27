@@ -11,6 +11,7 @@ public class GachaMachine : MonoBehaviour
     public Transform mouth;
     public float vibrateAmplitude = 0.03f;
     public float vibrateDuration = 0.1f;
+    public Transform openPos;
 
     static public GachaMachine instance;
 
@@ -23,6 +24,7 @@ public class GachaMachine : MonoBehaviour
         startPos = gacha.enclosure.localPosition;
         startAngles = gacha.enclosure.localEulerAngles;
         gacha.gameObject.SetActive(false);
+        gacha.doContentAnimate = false;
     }
 
     [Button]
@@ -55,6 +57,7 @@ public class GachaMachine : MonoBehaviour
         gacha.effectRoot.DOKill();
         gacha.gameObject.SetActive(false);
         gacha.breakRoot.gameObject.SetActive(false);
+        gacha.doContentAnimate = false;
 
         string id = gacha.Randomise();
         StartVibrating();
@@ -78,6 +81,14 @@ public class GachaMachine : MonoBehaviour
                     gacha.breakRoot.gameObject.SetActive(true);
                     gacha.effectRoot.localScale = Vector3.zero;
                     gacha.effectRoot.DOScale(1f, 0.3f).SetEase(Ease.OutQuad);
+
+                    gacha.content.transform.DOKill();
+                    gacha.content.transform.DOMove(openPos.position, 0.2f).SetEase(Ease.OutSine);
+                    gacha.content.transform.DOScale(openPos.localScale, 0.2f).SetEase(Ease.OutSine);
+                    gacha.content.transform.DOLocalRotate(openPos.localEulerAngles, 0.2f).SetEase(Ease.OutSine).OnComplete(()=>
+                    {
+                        gacha.doContentAnimate = true;
+                    });
                 });
             });
         });

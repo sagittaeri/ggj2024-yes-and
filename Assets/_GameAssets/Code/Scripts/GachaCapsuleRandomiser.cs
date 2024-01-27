@@ -4,12 +4,13 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using System.Threading;
 
 public class GachaCapsuleRandomiser : MonoBehaviour
 {
     public Transform enclosure;
     public Transform breakRoot;
-    public float breakRotateInterval = 0.3f;
+    public float breakRotateInterval = 0.5f;
     public Transform breakableTopHalf;
     public Transform breakableMid;
     public Transform breakableBottomHalf;
@@ -23,12 +24,15 @@ public class GachaCapsuleRandomiser : MonoBehaviour
     public Material[] materialList;
 
     public GameObject content;
+    public bool doContentAnimate = false;
+    public float contentRotate = 37.5f;
 
     private float timeRotate = -1f;
     private Vector3 topPos;
     private Vector3 bottomPos;
     private Vector3 topAngle;
     private Vector3 bottomAngle;
+    private bool contentLeft;
 
     void Awake()
     {
@@ -53,6 +57,14 @@ public class GachaCapsuleRandomiser : MonoBehaviour
         {
             timeRotate = Time.timeSinceLevelLoad + breakRotateInterval;
             effect.localEulerAngles = new Vector3(0f, 0f, Random.Range(0f, 360f));
+
+            if (doContentAnimate)
+            {
+                Vector3 newAngle = content.transform.localEulerAngles;
+                newAngle.z = contentLeft ? -contentRotate : -contentRotate * 3f;
+                content.transform.localEulerAngles = newAngle;
+                contentLeft = !contentLeft;
+            }
         }
     }
 
@@ -68,7 +80,7 @@ public class GachaCapsuleRandomiser : MonoBehaviour
         GameObject chosenOne = contentList[chosenIndex];
         content = Instantiate(chosenOne, enclosure);
         content.transform.localPosition = Vector3.zero;
-        content.transform.rotation = Random.rotation;
+        content.transform.localEulerAngles = Vector3.zero;
 
         if (enclosure != null)
         {

@@ -35,12 +35,10 @@ public class GameController : MonoBehaviour
         GameObject a = Instantiate(FuckWits[oxygenThief],_startPos.position, _startPos.rotation);
         
         a.GetComponent<LDNEntity>().Controller = this;
-        UIRef.Init(a.GetComponent<LDNEntity>());
-        
+        UIRef.Entity = a.GetComponent<LDNEntity>();
         _camera.GetComponent<CameraFollowScript>().Player = a.GetComponent<LDNEntity>().RagDollTorso;
     }
 }
 
 [System.Serializable]
 public class FuckwitCatalogue : UnitySerializedDictionary<FuckWits, GameObject> { }
-

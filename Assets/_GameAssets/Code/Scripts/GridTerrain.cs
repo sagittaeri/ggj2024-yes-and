@@ -6,12 +6,13 @@ using UnityEngine;
 //CodingWithRus / goldennoodles
 public class GridTerrain : MonoBehaviour
 {
-    private int terrainState = 0;
-    public List<GameObject> planeList;
+    public GameObject planeList;
     public GameObject player;
 
     private int radius = 10;
-    private int planeOffset = 40;
+    private int radiusY = 2;
+    private int planeOffsetY = 1080;
+    private int planeOffsetX = 800;
 
     private Vector3 startPos = Vector3.zero;
 
@@ -21,36 +22,17 @@ public class GridTerrain : MonoBehaviour
     private int XPlayerLocation;
     private int ZPlayerLocation, prevZPlayerLocation;
 
-    Hashtable tilePlane = new Hashtable();
+    Hashtable tilePlane = new();
 
     public void jankyfix()
     {
-        XPlayerLocation= (int)Mathf.Floor(player.transform.position.x / planeOffset) * planeOffset;
-        ZPlayerLocation= (int)Mathf.Floor(player.transform.position.z / planeOffset) * planeOffset;
+        XPlayerLocation= (int)Mathf.Floor(player.transform.position.x / planeOffsetY) * planeOffsetY;
+        ZPlayerLocation= (int)Mathf.Floor(player.transform.position.z / planeOffsetY) * planeOffsetY;
     }
     
     void Update()
     {
         generateWorld();
-    }
-
-    private void LateUpdate()
-    {
-        if (prevZPlayerLocation != ZPlayerLocation)
-        {
-            prevZPlayerLocation = ZPlayerLocation;
-            if (ZPlayerLocation % 32 == 0)
-            {
-                if (terrainState > 5)
-                    terrainState = 0;
-                else
-                    terrainState++;
-            }
-
-            
-
-        }
-        
     }
 
     private void generateWorld ()
@@ -60,27 +42,21 @@ public class GridTerrain : MonoBehaviour
             jankyfix();
         if(startPos == Vector3.zero||hasPlayerMoved(XPlayerMove, ZPlayerMove))
         {
-
             CreateTile();
         }
     }
 
     private void CreateTile()
     {
-        for (int x = -radius; x < radius; x++)
+        for (int x = 0; x < radiusY; x++)
         {
-            
-
-            for (int z = -radius; z < radius; z++)
+            for (int y = -radiusY; y < radiusY; y++)
             {
-                
-                Vector3 pos = new Vector3((x * planeOffset + XPlayerLocation), 0, (z * planeOffset + ZPlayerLocation));
-                
+                Vector3 pos = new Vector3(x * planeOffsetX + XPlayerLocation, 0, (y * planeOffsetY)+ ZPlayerLocation);
+
                 if (!tilePlane.Contains(pos))
                 {
-
-
-                    GameObject tile = Instantiate(planeList[terrainState], pos, Quaternion.identity);
+                    GameObject tile = Instantiate(planeList, pos, Quaternion.identity);
                     tilePlane.Add(pos, tile);
                 }
             }
@@ -89,7 +65,6 @@ public class GridTerrain : MonoBehaviour
 
     private bool hasPlayerMoved(int playerX, int playerZ)
     {
-       
-        return (Mathf.Abs(XPlayerMove) >= planeOffset || Mathf.Abs(ZPlayerMove) >= planeOffset);
+        return (Mathf.Abs(playerX) >= planeOffsetX || Mathf.Abs(playerZ) >= planeOffsetY);
     }
 }

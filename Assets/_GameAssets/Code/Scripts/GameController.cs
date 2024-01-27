@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public LauncherBarUI UIRef;
 
     static public GameController instance;
+    [SerializeField] private GridTerrain terrainGenerator;
 
     float startZ;
     
@@ -36,11 +37,13 @@ public class GameController : MonoBehaviour
     public void SpawnLDNFuckwit(FuckWits oxygenThief)
     {
         GameObject a = Instantiate(FuckWits[oxygenThief],_startPos.position, _startPos.rotation);
+       
         
         UIRef.Entity = a.GetComponent<LDNEntity>();
         UIRef.Entity.Controller = this;
         _camera.GetComponent<CameraFollowScript>().Player = UIRef.Entity.RagDollTorso;
         UIRef.Init(UIRef.Entity);
+        terrainGenerator.player = UIRef.Entity.RagDollTorso.gameObject;
         startZ = UIRef.Entity.RagDollTorso.transform.position.z;
         UIRef.Entity.RagDollTorso.AddComponent<ColliderHandler>();
     }

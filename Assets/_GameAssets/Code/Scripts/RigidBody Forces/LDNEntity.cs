@@ -58,9 +58,18 @@ public class LDNEntity : MonoBehaviour
         Launcher();
         GameController.instance.UpdateDistance();
 
+        
+        if (_ragdollTorso.velocity.magnitude < 0.1f)
+            Debug.Log("Stopped");
         //Steering.
         /*_ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);*/
 
+    }
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //throw new NotImplementedException();
     }
 
     void Launcher()

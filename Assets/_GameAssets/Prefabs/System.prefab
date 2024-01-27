@@ -476,10 +476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -750,6 +750,7 @@ MonoBehaviour:
     - {fileID: 2035963390049115991, guid: 76c5d2de2eec44481b14cfab29055e98, type: 3}
   placeholderRef: {fileID: 835220887938890716, guid: b81d209e7c52f49a3a70d9c10c1af243, type: 3}
   UIRef: {fileID: 1648952276022566858}
+  terrainGenerator: {fileID: 6245520096671656789}
 --- !u!114 &6245520096671656789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,7 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36eaa178dbbb54f93885a0a0da894605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planeList: []
+  planeList: {fileID: 6924501094127491677, guid: 02ba6666781874c31bb84a87176b911a, type: 3}
   player: {fileID: 0}
 --- !u!1 &6458826923568137955
 GameObject:

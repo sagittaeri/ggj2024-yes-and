@@ -55,7 +55,7 @@ public class LDNEntity : MonoBehaviour
     void Update()
     {
         Launcher();
-
+        GameController.instance.UpdateDistance();
 
         //Steering.
         /*_ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);*/

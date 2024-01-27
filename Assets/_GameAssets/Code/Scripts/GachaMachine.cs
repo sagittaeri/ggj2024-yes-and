@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using System;
@@ -31,6 +32,8 @@ public class GachaMachine : MonoBehaviour
 
     private Vector3 startPos;
     private Vector3 startAngles;
+    private Tween autoTween;
+    private FuckWits currentFuckwit;
 
     void Awake()
     {
@@ -39,6 +42,14 @@ public class GachaMachine : MonoBehaviour
         startAngles = gacha.enclosure.localEulerAngles;
         gacha.gameObject.SetActive(false);
         gacha.doContentAnimate = false;
+    }
+
+    void Update()
+    {
+        if (autoTween != null && autoTween.IsPlaying() && Input.anyKeyDown)
+        {
+            ContinueToGame();
+        }
     }
 
     [Button]
@@ -62,6 +73,16 @@ public class GachaMachine : MonoBehaviour
             floor.transform.DOKill();
             floor.transform.localPosition = Vector3.zero;
         }
+    }
+
+    public void Reset()
+    {
+        gacha.enclosure.transform.DOKill();
+        gacha.effectRoot.DOKill();
+        gacha.gameObject.SetActive(false);
+        gacha.breakRoot.gameObject.SetActive(false);
+        gacha.doContentAnimate = false;
+        playButton.interactable = true;
     }
 
     [Button]
@@ -98,6 +119,7 @@ public class GachaMachine : MonoBehaviour
                         {
                             gacha.nameText.text = p.name;
                             gacha.descriptionText.text = p.description;
+                            currentFuckwit = p.fuckwit;
                             break;
                         }
                     }
@@ -111,9 +133,33 @@ public class GachaMachine : MonoBehaviour
                     gacha.content.transform.DOLocalRotate(openPos.localEulerAngles, 0.2f).SetEase(Ease.OutSine).OnComplete(()=>
                     {
                         gacha.doContentAnimate = true;
+                        if (autoTween != null)
+                            autoTween.Kill();
+                        autoTween = DOVirtual.DelayedCall(5f, ()=>
+                        {
+                            ContinueToGame();
+                        });
                     });
                 });
             });
+        });
+    }
+
+    public void ContinueToGame()
+    {
+        if (autoTween != null)
+            autoTween.Kill();
+        autoTween = null;
+        DontDestroyOnLoad(gacha.breakRoot.gameObject);
+        gacha.breakRoot.SetParent(null);
+        Reset();
+        gacha.breakRoot.gameObject.SetActive(true);
+        SceneManager.LoadScene("GameLevel", LoadSceneMode.Single);
+        DOVirtual.DelayedCall(0.5f, ()=>
+        {
+            GameController gameController = FindFirstObjectByType<GameController>();
+            gameController.SpawnLDNFuckwit(currentFuckwit);
+            Destroy(gacha.breakRoot.gameObject);
         });
     }
 }

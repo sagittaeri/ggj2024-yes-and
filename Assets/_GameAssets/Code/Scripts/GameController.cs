@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         GameObject a = Instantiate(FuckWits[oxygenThief],_startPos.position, _startPos.rotation);
         
         a.GetComponent<LDNEntity>().Controller = this;
-        UIRef.Entity = a.GetComponent<LDNEntity>();
+        UIRef.Init(a.GetComponent<LDNEntity>());
         
         _camera.GetComponent<CameraFollowScript>().Player = a.GetComponent<LDNEntity>().RagDollTorso;
     }

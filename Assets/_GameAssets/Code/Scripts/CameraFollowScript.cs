@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class CameraFollowScript : MonoBehaviour
@@ -16,6 +17,7 @@ public class CameraFollowScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        transform.position = _player.transform.position + _camOffset;
+        if (Player != null)
+            transform.position = _player.transform.position + _camOffset;
     }
 }

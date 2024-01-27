@@ -10,6 +10,8 @@ public class EnableRagdoll : MonoBehaviour
     private Rigidbody _rb => GetComponent<Rigidbody>();
     [SerializeField] private float _launchStrength = 100f;
     [SerializeField] private Rigidbody _ragdollTorso;
+    [SerializeField] private ForceMode _forceType;
+    [SerializeField] private float _nudgeAmount = 0.5f;
 
     private void Awake()
     {
@@ -43,5 +45,9 @@ public class EnableRagdoll : MonoBehaviour
                 rb.useGravity = true;
             }
         }
+
+
+        _ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);
+        
     }
 }

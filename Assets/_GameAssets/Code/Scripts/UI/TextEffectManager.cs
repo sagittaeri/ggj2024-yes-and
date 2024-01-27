@@ -20,21 +20,26 @@ public class TextEffectManager : MonoBehaviour
         Whoosh,
     }
 
-    static private Transform textParent;
+    public Transform textParent;
     static private TextEffectManager _instance;
     static public TextEffectManager instance
     {
         get
         {
-            if (_instance == null)
-            {
-                GameObject obj = new GameObject("TextSplashManager");
-                _instance = obj.AddComponent(typeof(TextEffectManager)) as TextEffectManager;
-                DontDestroyOnLoad(obj);
-                textParent = GameObject.Find("TextEffectsParent").transform;
-            }
+            // if (_instance == null)
+            // {
+            //     GameObject obj = new GameObject("TextSplashManager");
+            //     _instance = obj.AddComponent(typeof(TextEffectManager)) as TextEffectManager;
+            //     DontDestroyOnLoad(obj);
+            //     textParent = GameObject.Find("TextEffectsParent").transform;
+            // }
             return _instance;
         }
+    }
+
+    void Awake()
+    {
+        _instance = this;
     }
 
     public GameObject Load(string id)

@@ -16,10 +16,8 @@ public class TextEffectsParentTest : MonoBehaviour
     }
 
     [Button]
-    public GameObject CreateSplatText(string text)
+    public GameObject CreateEffect(TextEffectManager.AnimStyle animStyle = TextEffectManager.AnimStyle.Splat)
     {
-        if (string.IsNullOrWhiteSpace(text))
-            text = "TEST!!";
-        return TextEffectManager.instance.CreateText("SplatTextEffect", text, TextEffectManager.AnimStyle.Splat);
+        return TextEffectManager.instance.CreateEffect(animStyle);
     }
 }

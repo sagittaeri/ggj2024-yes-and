@@ -108,8 +108,11 @@ public class GachaCapsuleRandomiser : MonoBehaviour
         enclosure.DOScaleY(0.8f, 0.3f).SetEase(Ease.OutQuad).OnComplete(()=>
         {
             enclosure.DOScaleY(1f, 0.2f).SetEase(Ease.OutQuad);
-            if (breakableMid != null)
-                breakableMid.gameObject.SetActive(false);
+            DOVirtual.DelayedCall(0.1f, ()=>
+            {
+                if (breakableMid != null)
+                    breakableMid.gameObject.SetActive(false);
+            });
             if (breakableTopHalf != null)
             {
                 breakableTopHalf.DOKill();

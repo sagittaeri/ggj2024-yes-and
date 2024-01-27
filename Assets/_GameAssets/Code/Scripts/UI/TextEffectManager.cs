@@ -9,8 +9,14 @@ public class TextEffectManager : MonoBehaviour
 {
     public enum AnimStyle
     {
-        IntoTheScreen,
+        Default,
+        Sizzle,
+        Vroom,
+        Boing,
         Splat,
+        Bang,
+        Thump,
+        Whoosh,
     }
 
     static private Transform textParent;
@@ -42,19 +48,25 @@ public class TextEffectManager : MonoBehaviour
         return obj;
     }
 
-    public GameObject CreateText(string id, string text, AnimStyle animStyle = AnimStyle.IntoTheScreen)
+    public GameObject CreateText(string id, string text = null, AnimStyle animStyle = AnimStyle.Default)
     {
         GameObject obj = Load(id);
         if (id == null)
             return null;
         TextMeshProUGUI textObj = obj.GetComponentInChildren<TextMeshProUGUI>();
-        if (textObj != null)
-            textObj.text = text;
-        
-        if (animStyle == AnimStyle.IntoTheScreen)
+        if (!string.IsNullOrWhiteSpace(text))
         {
-            textObj.CrossFadeAlpha(0f, 0f, false);
-            textObj.CrossFadeAlpha(1f, 0.2f, false);
+            if (textObj != null)
+                textObj.text = text;
+        }
+        
+        if (animStyle == AnimStyle.Default)
+        {
+            if (textObj != null)
+            {
+                textObj.CrossFadeAlpha(0f, 0f, false);
+                textObj.CrossFadeAlpha(1f, 0.2f, false);
+            }
             obj.transform.localScale = Vector3.one * 3f;
             obj.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBounce);
 
@@ -63,12 +75,40 @@ public class TextEffectManager : MonoBehaviour
                 Destroy(obj);
             });
         }
+        else if (animStyle == AnimStyle.Sizzle)
+        {
+            if (textObj != null)
+            {
+                textObj.CrossFadeAlpha(0f, 0f, false);
+                textObj.CrossFadeAlpha(1f, 0.2f, false);
+                textObj.transform.localScale = Vector3.one * 3f;
+                textObj.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBounce);
+            }
+
+            Transform splatRoot = obj.transform.Find("ImageRoot");
+            if (splatRoot != null)
+            {
+                foreach (Transform child in splatRoot)
+                {
+                    float delay = Random.Range(0f, 0.3f);
+                    child.localScale = Vector3.zero;
+                    child.DOScale(1f, 0.2f).SetDelay(delay);
+                }
+            }
+            obj.transform.DOScale(0f, 0.2f).SetEase(Ease.InCubic).SetDelay(1.5f).OnComplete(()=>
+            {
+                Destroy(obj);
+            });
+        }
         else if (animStyle == AnimStyle.Splat)
         {
-            textObj.CrossFadeAlpha(0f, 0f, false);
-            textObj.CrossFadeAlpha(1f, 0.2f, false);
-            textObj.transform.localScale = Vector3.one * 3f;
-            textObj.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBounce);
+            if (textObj != null)
+            {
+                textObj.CrossFadeAlpha(0f, 0f, false);
+                textObj.CrossFadeAlpha(1f, 0.2f, false);
+                textObj.transform.localScale = Vector3.one * 3f;
+                textObj.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBounce);
+            }
 
             Transform splatRoot = obj.transform.Find("SplatRoot");
             if (splatRoot != null)
@@ -80,11 +120,21 @@ public class TextEffectManager : MonoBehaviour
                     child.DOScale(1f, 0.2f).SetDelay(delay);
                 }
             }
-            obj.transform.DOScale(0f, 0.2f).SetEase(Ease.InCubic).SetDelay(2f).OnComplete(()=>
+            obj.transform.DOScale(0f, 0.2f).SetEase(Ease.InCubic).SetDelay(1.5f).OnComplete(()=>
             {
                 Destroy(obj);
             });
         }
         return obj;
+    }
+
+    public GameObject CreateSplatText(string text = null)
+    {
+        return CreateText("SplatTextEffect", text, AnimStyle.Splat);
+    }
+
+    public GameObject CreateEffect(AnimStyle animStyle)
+    {
+        return CreateText(animStyle + "TextEffect", null, animStyle);
     }
 }

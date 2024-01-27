@@ -451,6 +451,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1642063207093643862, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 993504539}
     - target: {fileID: 7814472739092361229, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
       propertyPath: m_Name
       value: GachaMachine

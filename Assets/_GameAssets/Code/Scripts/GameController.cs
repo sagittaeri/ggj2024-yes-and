@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -17,6 +18,8 @@ public class GameController : MonoBehaviour
     public LauncherBarUI UIRef;
 
     static public GameController instance;
+
+    float startZ;
     
     // Start is called before the first frame update
     void Awake()
@@ -34,9 +37,17 @@ public class GameController : MonoBehaviour
     {
         GameObject a = Instantiate(FuckWits[oxygenThief],_startPos.position, _startPos.rotation);
         
-        a.GetComponent<LDNEntity>().Controller = this;
         UIRef.Entity = a.GetComponent<LDNEntity>();
-        _camera.GetComponent<CameraFollowScript>().Player = a.GetComponent<LDNEntity>().RagDollTorso;
+        UIRef.Entity.Controller = this;
+        _camera.GetComponent<CameraFollowScript>().Player = UIRef.Entity.RagDollTorso;
+        UIRef.Init(UIRef.Entity);
+        startZ = UIRef.Entity.RagDollTorso.transform.position.z;
+        UIRef.Entity.RagDollTorso.AddComponent<ColliderHandler>();
+    }
+
+    public void UpdateDistance()
+    {
+        UIRef.SetDistanceText(UIRef.Entity.RagDollTorso.transform.position.z - startZ);
     }
 }
 

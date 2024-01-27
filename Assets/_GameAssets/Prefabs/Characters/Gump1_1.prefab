@@ -1503,10 +1503,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ragDollActive: 0
-  _launchStrength: 25
+  _launchStrength: 10
   _ragdollTorso: {fileID: 5781703772671139965}
   _forceType: 1
   _nudgeAmount: 2.5
+  _launchMult: 1
+  _launchDir: {x: 0, y: 0, z: 0}
+  pingpongMult: 0
+  pingpongDir: 0
 --- !u!136 &5209305891566292274
 CapsuleCollider:
   m_ObjectHideFlags: 0

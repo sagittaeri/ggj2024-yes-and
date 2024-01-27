@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startPos: {fileID: 817566519987453416}
-  _camera: {fileID: 0}
+  _camera: {fileID: 1963411995924746863}
   Arrow: {fileID: 7475555122517720665}
   FuckWits:
     keyData: 000000000100000002000000

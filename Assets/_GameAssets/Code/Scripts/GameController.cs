@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -18,6 +19,8 @@ public class GameController : MonoBehaviour
 
     static public GameController instance;
     [SerializeField] private GridTerrain terrainGenerator;
+
+    float startZ;
     
     // Start is called before the first frame update
     void Awake()
@@ -35,11 +38,19 @@ public class GameController : MonoBehaviour
     {
         GameObject a = Instantiate(FuckWits[oxygenThief],_startPos.position, _startPos.rotation);
        
+        
         UIRef.Entity = a.GetComponent<LDNEntity>();
         UIRef.Entity.Controller = this;
         _camera.GetComponent<CameraFollowScript>().Player = UIRef.Entity.RagDollTorso;
         UIRef.Init(UIRef.Entity);
         terrainGenerator.player = UIRef.Entity.RagDollTorso.gameObject;
+        startZ = UIRef.Entity.RagDollTorso.transform.position.z;
+        UIRef.Entity.RagDollTorso.AddComponent<ColliderHandler>();
+    }
+
+    public void UpdateDistance()
+    {
+        UIRef.SetDistanceText(UIRef.Entity.RagDollTorso.transform.position.z - startZ);
     }
 }
 

@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LauncherBarUI : MonoBehaviour
 {
+    public TextMeshProUGUI distanceText;
+
     [SerializeField] private Scrollbar _dirLaunch;
     [SerializeField] private Image _powerBar;
     [SerializeField] private LDNEntity entity;
@@ -18,6 +21,7 @@ public class LauncherBarUI : MonoBehaviour
     void Awake()
     {
         gameObject.SetActive(false);
+        SetDistanceText(0f);
     }
 
     private void OnDisable()
@@ -46,5 +50,10 @@ public class LauncherBarUI : MonoBehaviour
     public void LaunchDirUI(float amt)
     {
         _dirLaunch.value = amt;
+    }
+
+    public void SetDistanceText(float dist)
+    {
+        distanceText.text = $"{dist:n0}m";
     }
 }

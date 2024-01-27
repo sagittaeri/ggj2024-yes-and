@@ -66,7 +66,7 @@ public class LDNEntity : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     void Launcher()

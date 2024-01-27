@@ -27,7 +27,7 @@ public class GachaMachine : MonoBehaviour
         public string description;
     }
     public Person[] persons;
-
+    
     public GameObject[] floors;
     public GachaCapsuleRandomiser gacha;
     public Transform mouth;
@@ -38,6 +38,9 @@ public class GachaMachine : MonoBehaviour
 
     static public GachaMachine instance;
 
+    [SerializeField] private Transform _knob;
+    private Vector3 spinVector = Vector3.zero;
+    private bool _spinKnob;
     private Vector3 startPos;
     private Vector3 startAngles;
     private Tween autoTween;
@@ -55,6 +58,13 @@ public class GachaMachine : MonoBehaviour
 
     void Update()
     {
+        if (_spinKnob)
+        {
+            spinVector.z = Mathf.MoveTowardsAngle(spinVector.z, 180, Time.deltaTime*255);
+        }
+
+        _knob.localEulerAngles = spinVector;
+        
         if (state == State.BeforePull && Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
         else if (state == State.BeforePull && Input.anyKeyDown)
@@ -99,6 +109,7 @@ public class GachaMachine : MonoBehaviour
     [Button]
     public void RandomiseGacha()
     {
+        _spinKnob = true;
         state = State.Pulling;
         gacha.enclosure.transform.DOKill();
         gacha.effectRoot.DOKill();
@@ -106,7 +117,9 @@ public class GachaMachine : MonoBehaviour
         gacha.breakRoot.gameObject.SetActive(false);
         gacha.doContentAnimate = false;
         playButton.interactable = false;
-
+        _spinKnob = true;
+        
+        
         string id = gacha.Randomise();
         StartVibrating();
         DOVirtual.DelayedCall(2f, ()=>

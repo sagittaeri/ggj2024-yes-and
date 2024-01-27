@@ -9,7 +9,7 @@ public class GridTerrain : MonoBehaviour
     public GameObject planeList;
     public GameObject player;
 
-    private int radius = 10;
+    private int radius = 5;
     private int planeOffset = 1080;
 
     private Vector3 startPos = Vector3.zero;
@@ -47,18 +47,18 @@ public class GridTerrain : MonoBehaviour
 
     private void CreateTile()
     {
-        for (int x = -radius; x < radius; x++)
+        for (int x = 0; x < radius; x++)
         {
-            for (int y = -radius; y < radius; x++)
-            {
-                Vector3 pos = new Vector3((XPlayerLocation), 0, (x * planeOffset + ZPlayerLocation));
+            //for (int y = -radius/2; y < radius/2; y++)
+            //{
+                Vector3 pos = new Vector3((XPlayerLocation), 0, (x * planeOffset));
 
                 if (!tilePlane.Contains(pos))
                 {
                     GameObject tile = Instantiate(planeList, pos, Quaternion.identity);
                     tilePlane.Add(pos, tile);
                 }
-            }
+            //}
         }
     }
 

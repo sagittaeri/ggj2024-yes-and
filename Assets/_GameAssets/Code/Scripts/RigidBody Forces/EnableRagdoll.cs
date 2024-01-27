@@ -51,6 +51,8 @@ public class EnableRagdoll : MonoBehaviour
 
     void Launcher()
     {
+        if (_launchStage >= 2)
+            return;
         _launchDir.y = Mathf.Clamp(_launchDir.y +Input.GetAxis("Horizontal"), -45, 45);
         if (Input.GetButton("Fire1"))
         {
@@ -60,14 +62,16 @@ public class EnableRagdoll : MonoBehaviour
                 pingpongMult = _maxLauncherSpeed;
                 
                 _ragDollActive = true;
+                _launchStage = 2;
             }
         }
         if (Input.GetButtonUp("Fire1"))
         {
             _ragDollActive = true;
+            _launchStage = 2;
         }
 
-        _launchStage = 2;
+        
         
         if (_ragDollActive && _ragdollTorso)
         {

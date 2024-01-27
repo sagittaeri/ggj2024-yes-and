@@ -66,9 +66,12 @@ public class LDNEntity : MonoBehaviour
     {
         if (_launchStage >= 2)
             return;
-        _launchDir.y = Mathf.Clamp(_launchDir.y +Input.GetAxis("Horizontal"), -45, 45);
+        _launchDir.y = Mathf.Clamp(_launchDir.y +Input.GetAxis("Horizontal")/2, -45, 45);
         OnDirSet((_launchDir.y/90)+0.5f);
-        Controller.Arrow.localEulerAngles = new Vector3(90,0,-_launchDir.y);
+        
+        if (Controller)
+            Controller.Arrow.localEulerAngles = new Vector3(90,0,-_launchDir.y);
+        
         if (Input.GetButton("Fire1"))
         {
             pingpongMult = Mathf.Clamp(pingpongMult + Time.deltaTime * 2, 0, _maxLauncherSpeed);
@@ -76,7 +79,8 @@ public class LDNEntity : MonoBehaviour
             if (pingpongMult >= _maxLauncherSpeed)
             {
                 pingpongMult = _maxLauncherSpeed;
-                Controller.Arrow.gameObject.SetActive(false);
+                if (Controller)
+                    Controller.Arrow.gameObject.SetActive(false);
                 _ragDollActive = true;
                 _launchStage = 2;
             }
@@ -85,7 +89,8 @@ public class LDNEntity : MonoBehaviour
         {
             _ragDollActive = true;
             _launchStage = 2;
-            Controller.Arrow.gameObject.SetActive(false);
+            if (Controller)
+                Controller.Arrow.gameObject.SetActive(false);
         }
         
         if (_ragDollActive && _ragdollTorso)

@@ -135,7 +135,7 @@ public class GachaMachine : MonoBehaviour
                         gacha.doContentAnimate = true;
                         if (autoTween != null)
                             autoTween.Kill();
-                        autoTween = DOVirtual.DelayedCall(5f, ()=>
+                        autoTween = DOVirtual.DelayedCall(20f, ()=>
                         {
                             ContinueToGame();
                         });

@@ -3,9 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening;
+using System;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class GachaMachine : MonoBehaviour
 {
+    [Serializable]
+    public class Person
+    {
+        public string id;
+        public FuckWits fuckwit;
+        public string name;
+        public string description;
+    }
+    public Person[] persons;
+
     public GameObject[] floors;
     public GachaCapsuleRandomiser gacha;
     public Transform mouth;
@@ -35,7 +47,7 @@ public class GachaMachine : MonoBehaviour
         {
             floor.transform.DOLocalMoveY(vibrateAmplitude, vibrateDuration)
                 .SetEase(Ease.InOutSine)
-                .SetDelay(Random.Range(0f, 0.5f))
+                .SetDelay(UnityEngine.Random.Range(0f, 0.5f))
                 .SetLoops(-1, LoopType.Yoyo);
         }
     }
@@ -66,7 +78,7 @@ public class GachaMachine : MonoBehaviour
             StopVibrating();
             gacha.gameObject.SetActive(true);
             gacha.enclosure.transform.position = mouth.position;
-            gacha.enclosure.transform.rotation = Random.rotation;
+            gacha.enclosure.transform.rotation = UnityEngine.Random.rotation;
             gacha.enclosure.transform.localScale = Vector3.one * 0.5f;
             gacha.enclosure.transform.DOLocalRotate(startAngles, 0.6f, RotateMode.FastBeyond360);
             gacha.enclosure.transform.DOLocalMoveX(startPos.x, 0.5f).SetEase(Ease.OutQuad);
@@ -77,7 +89,15 @@ public class GachaMachine : MonoBehaviour
                 gacha.BreakOpen();
                 DOVirtual.DelayedCall(0.3f, ()=>
                 {
-                    gacha.nameText.text = id;
+                    foreach (Person p in persons)
+                    {
+                        if (p.id == id)
+                        {
+                            gacha.nameText.text = p.name;
+                            gacha.descriptionText.text = p.description;
+                            break;
+                        }
+                    }
                     gacha.breakRoot.gameObject.SetActive(true);
                     gacha.effectRoot.localScale = Vector3.zero;
                     gacha.effectRoot.DOScale(1f, 0.3f).SetEase(Ease.OutQuad);

@@ -1147,6 +1147,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccbff47d3c0b40ba810b441d3248d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  persons:
+  - id: char1
+    fuckwit: 0
+    name: Ronald Gump
+    description: "2016\u2019s President of Yoosa and the guy who promised to build
+      a wall, Ronald Gump not only didn't deliver a single promise in his entire
+      life but he tried to steal the 2020 election too! Sad!"
+  - id: char2
+    fuckwit: 1
+    name: Scum Jorrison
+    description: "Happy clapper extraordinaire, relentless stooge, and back for round
+      2! Scum Morisson did not learn his lesson when we rehabilitated him (and his
+      pants!) in Engadine Macca\u2019s with laxatives! Hawaii won\u2019t save you
+      this time, Scummo!"
+  - id: char3
+    fuckwit: 2
+    name: Xlon Muskrat
+    description: Xlon Muskrat, the billionaire playboy son of an emerald mine slave-driver,
+      now tech mogul who sells complete bullshit to businessmen. He is in dire need
+      of some social rehabilitation tonight!
+  - id: char4
+    fuckwit: 0
+    name: Ronald Gump
+    description: "2016\u2019s President of Yoosa and the guy who promised to build
+      a wall, Ronald Gump not only didn't deliver a single promise in his entire
+      life but he tried to steal the 2020 election too! Sad!"
+  - id: char5
+    fuckwit: 1
+    name: Scum Jorrison
+    description: "Happy clapper extraordinaire, relentless stooge, and back for round
+      2! Scum jorison did not learn his lesson when we rehabilitated him (and his
+      pants!) in Engadine Macca\u2019s with laxatives! Hawaii won\u2019t save you
+      this time, Scummo!"
+  - id: char6
+    fuckwit: 2
+    name: Xlon Muskrat
+    description: Xlon Muskrat, the billionaire playboy son of an emerald mine slave-driver,
+      now tech mogul who sells complete bullshit to businessmen. He is in dire need
+      of some social rehabilitation tonight!
   floors:
   - {fileID: 7978767162502574216}
   - {fileID: 4232273907008699675}

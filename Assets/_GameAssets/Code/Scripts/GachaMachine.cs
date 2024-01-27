@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using DG.Tweening;
 using System;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEngine.UI;
 
 public class GachaMachine : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GachaMachine : MonoBehaviour
     public float vibrateAmplitude = 0.03f;
     public float vibrateDuration = 0.1f;
     public Transform openPos;
+    public Button playButton;
 
     static public GachaMachine instance;
 
@@ -70,6 +72,7 @@ public class GachaMachine : MonoBehaviour
         gacha.gameObject.SetActive(false);
         gacha.breakRoot.gameObject.SetActive(false);
         gacha.doContentAnimate = false;
+        playButton.interactable = false;
 
         string id = gacha.Randomise();
         StartVibrating();

@@ -15,18 +15,28 @@ public class LauncherBarUI : MonoBehaviour
         set => entity = value;
     }
 
-    private void OnEnable()
+    void Awake()
     {
-        entity.onPowerSet += LaunchPowerUI;
-        entity.onDirSet += LaunchDirUI;
+        gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
-        entity.onPowerSet -= LaunchPowerUI;
-        entity.onDirSet -= LaunchDirUI;
+        if (entity != null)
+        {
+            entity.onPowerSet -= LaunchPowerUI;
+            entity.onDirSet -= LaunchDirUI;
+        }
     }
 
+
+    public void Init(LDNEntity _entity)
+    {
+        entity = _entity;
+        entity.onPowerSet += LaunchPowerUI;
+        entity.onDirSet += LaunchDirUI;
+        gameObject.SetActive(true);
+    }
     
     // Update is called once per frame
     public void LaunchPowerUI(float amt)

@@ -20,11 +20,11 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         _camera = Camera.main;
-        LDNEntity a = Instantiate(placeholderRef, _startPos.position, _startPos.rotation);
-        a.Controller = this;
-        UIRef.Entity = a;
+        // LDNEntity a = Instantiate(placeholderRef, _startPos.position, _startPos.rotation);
+        // a.Controller = this;
+        // UIRef.Entity = a;
         
-        _camera.GetComponent<CameraFollowScript>().Player = a.RagDollTorso;
+        // _camera.GetComponent<CameraFollowScript>().Player = a.RagDollTorso;
     }
 
     public void SpawnLDNFuckwit(FuckWits oxygenThief)
@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         GameObject a = Instantiate(FuckWits[oxygenThief],_startPos.position, _startPos.rotation);
         
         a.GetComponent<LDNEntity>().Controller = this;
-        UIRef.Entity = a.GetComponent<LDNEntity>();
+        UIRef.Init(a.GetComponent<LDNEntity>());
         
         _camera.GetComponent<CameraFollowScript>().Player = a.GetComponent<LDNEntity>().RagDollTorso;
     }

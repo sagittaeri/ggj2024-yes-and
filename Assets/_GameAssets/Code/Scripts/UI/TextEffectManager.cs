@@ -168,11 +168,12 @@ public class TextEffectManager : MonoBehaviour
             Transform splatRoot = obj.transform.Find("SplatRoot");
             if (splatRoot != null)
             {
+                int i = 0;
                 foreach (Transform child in splatRoot)
                 {
-                    float delay = Random.Range(0f, 0.3f);
                     child.localScale = Vector3.zero;
-                    child.DOScale(1f, 0.2f).SetDelay(delay);
+                    child.DOScale(1f, 0.2f).SetDelay(i * 0.15f);
+                    i++;
                 }
             }
             obj.transform.DOScale(0f, 0.2f).SetEase(Ease.InCubic).SetDelay(1.5f).OnComplete(()=>

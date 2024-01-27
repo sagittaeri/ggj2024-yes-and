@@ -48,7 +48,7 @@ public class GridTerrain : MonoBehaviour
 
     private void CreateTile()
     {
-        for (int x = -radiusY; x < radiusY; x++)
+        for (int x = 0; x < radiusY; x++)
         {
             for (int y = -radiusY; y < radiusY; y++)
             {

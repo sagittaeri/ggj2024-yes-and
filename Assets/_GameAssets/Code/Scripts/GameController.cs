@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     public LauncherBarUI UIRef;
 
     static public GameController instance;
+    [SerializeField] private GridTerrain terrainGenerator;
     
     // Start is called before the first frame update
     void Awake()
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour
         UIRef.Entity.Controller = this;
         _camera.GetComponent<CameraFollowScript>().Player = UIRef.Entity.RagDollTorso;
         UIRef.Init(UIRef.Entity);
+        terrainGenerator.player = UIRef.Entity.RagDollTorso.gameObject;
     }
 }
 

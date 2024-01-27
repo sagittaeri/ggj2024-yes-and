@@ -748,6 +748,7 @@ MonoBehaviour:
     - {fileID: 2035963390049115991, guid: 76c5d2de2eec44481b14cfab29055e98, type: 3}
   placeholderRef: {fileID: 835220887938890716, guid: b81d209e7c52f49a3a70d9c10c1af243, type: 3}
   UIRef: {fileID: 1648952276022566858}
+  terrainGenerator: {fileID: 6245520096671656789}
 --- !u!114 &6245520096671656789
 MonoBehaviour:
   m_ObjectHideFlags: 0

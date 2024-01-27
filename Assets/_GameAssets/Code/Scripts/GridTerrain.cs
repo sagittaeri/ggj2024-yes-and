@@ -9,8 +9,10 @@ public class GridTerrain : MonoBehaviour
     public GameObject planeList;
     public GameObject player;
 
-    private int radius = 5;
-    private int planeOffset = 1080;
+    private int radius = 10;
+    private int radiusY = 2;
+    private int planeOffsetY = 1080;
+    private int planeOffsetX = 800;
 
     private Vector3 startPos = Vector3.zero;
 
@@ -20,12 +22,12 @@ public class GridTerrain : MonoBehaviour
     private int XPlayerLocation;
     private int ZPlayerLocation, prevZPlayerLocation;
 
-    Hashtable tilePlane = new Hashtable();
+    Hashtable tilePlane = new();
 
     public void jankyfix()
     {
-        XPlayerLocation= (int)Mathf.Floor(player.transform.position.x / planeOffset) * planeOffset;
-        ZPlayerLocation= (int)Mathf.Floor(player.transform.position.z / planeOffset) * planeOffset;
+        XPlayerLocation= (int)Mathf.Floor(player.transform.position.x / planeOffsetY) * planeOffsetY;
+        ZPlayerLocation= (int)Mathf.Floor(player.transform.position.z / planeOffsetY) * planeOffsetY;
     }
     
     void Update()
@@ -40,31 +42,29 @@ public class GridTerrain : MonoBehaviour
             jankyfix();
         if(startPos == Vector3.zero||hasPlayerMoved(XPlayerMove, ZPlayerMove))
         {
-
             CreateTile();
         }
     }
 
     private void CreateTile()
     {
-        for (int x = 0; x < radius; x++)
+        for (int x = -radiusY; x < radiusY; x++)
         {
-            //for (int y = -radius/2; y < radius/2; y++)
-            //{
-                Vector3 pos = new Vector3((XPlayerLocation), 0, (x * planeOffset));
+            for (int y = -radiusY; y < radiusY; y++)
+            {
+                Vector3 pos = new Vector3(x * planeOffsetX + XPlayerLocation, 0, (y * planeOffsetY)+ ZPlayerLocation);
 
                 if (!tilePlane.Contains(pos))
                 {
                     GameObject tile = Instantiate(planeList, pos, Quaternion.identity);
                     tilePlane.Add(pos, tile);
                 }
-            //}
+            }
         }
     }
 
     private bool hasPlayerMoved(int playerX, int playerZ)
     {
-       
-        return (Mathf.Abs(XPlayerMove) >= planeOffset || Mathf.Abs(ZPlayerMove) >= planeOffset);
+        return (Mathf.Abs(playerX) >= planeOffsetX || Mathf.Abs(playerZ) >= planeOffsetY);
     }
 }

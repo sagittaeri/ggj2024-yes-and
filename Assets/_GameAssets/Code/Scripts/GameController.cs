@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -41,6 +42,7 @@ public class GameController : MonoBehaviour
         _camera.GetComponent<CameraFollowScript>().Player = UIRef.Entity.RagDollTorso;
         UIRef.Init(UIRef.Entity);
         startZ = UIRef.Entity.RagDollTorso.transform.position.z;
+        UIRef.Entity.RagDollTorso.AddComponent<ColliderHandler>();
     }
 
     public void UpdateDistance()

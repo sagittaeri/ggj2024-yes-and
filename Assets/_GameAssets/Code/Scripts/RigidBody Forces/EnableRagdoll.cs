@@ -15,6 +15,16 @@ public class EnableRagdoll : MonoBehaviour
     {
         if (!_ragdollTorso)
             Debug.LogError("Torso Ragdoll Unassigned.");
+        
+        foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
+        {
+            _ragDollActive = false;
+            _rb.isKinematic = false;
+            _rb.useGravity = true;
+            
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
     }
 
     void Update()

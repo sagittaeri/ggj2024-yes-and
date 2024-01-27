@@ -6,12 +6,11 @@ using UnityEngine;
 //CodingWithRus / goldennoodles
 public class GridTerrain : MonoBehaviour
 {
-    private int terrainState = 0;
-    public List<GameObject> planeList;
+    public GameObject planeList;
     public GameObject player;
 
     private int radius = 10;
-    private int planeOffset = 40;
+    private int planeOffset = 1080;
 
     private Vector3 startPos = Vector3.zero;
 
@@ -34,25 +33,6 @@ public class GridTerrain : MonoBehaviour
         generateWorld();
     }
 
-    private void LateUpdate()
-    {
-        if (prevZPlayerLocation != ZPlayerLocation)
-        {
-            prevZPlayerLocation = ZPlayerLocation;
-            if (ZPlayerLocation % 32 == 0)
-            {
-                if (terrainState > 5)
-                    terrainState = 0;
-                else
-                    terrainState++;
-            }
-
-            
-
-        }
-        
-    }
-
     private void generateWorld ()
     {
 
@@ -69,18 +49,13 @@ public class GridTerrain : MonoBehaviour
     {
         for (int x = -radius; x < radius; x++)
         {
-            
-
-            for (int z = -radius; z < radius; z++)
+            for (int y = -radius; y < radius; x++)
             {
-                
-                Vector3 pos = new Vector3((x * planeOffset + XPlayerLocation), 0, (z * planeOffset + ZPlayerLocation));
-                
+                Vector3 pos = new Vector3((XPlayerLocation), 0, (x * planeOffset + ZPlayerLocation));
+
                 if (!tilePlane.Contains(pos))
                 {
-
-
-                    GameObject tile = Instantiate(planeList[terrainState], pos, Quaternion.identity);
+                    GameObject tile = Instantiate(planeList, pos, Quaternion.identity);
                     tilePlane.Add(pos, tile);
                 }
             }

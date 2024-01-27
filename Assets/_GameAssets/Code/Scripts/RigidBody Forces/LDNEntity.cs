@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,6 +61,12 @@ public class LDNEntity : MonoBehaviour
         //Steering.
         /*_ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);*/
 
+    }
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        throw new NotImplementedException();
     }
 
     void Launcher()

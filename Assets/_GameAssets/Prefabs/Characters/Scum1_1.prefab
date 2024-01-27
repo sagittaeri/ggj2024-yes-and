@@ -1313,12 +1313,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ragDollActive: 0
-  _launchStrength: 10
+  _launchStrength: 2
   _ragdollTorso: {fileID: 9124838738773979595}
   _forceType: 1
   _nudgeAmount: 2.5
   _launchMult: 1
   _launchDir: {x: 0, y: 0, z: 0}
+  _maxLauncherSpeed: 8
   pingpongMult: 0
   pingpongDir: 0
 --- !u!136 &3822484846396724959

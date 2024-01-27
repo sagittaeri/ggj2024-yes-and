@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnableRagdoll : MonoBehaviour
+public class LDNEntity : MonoBehaviour
 {
     [SerializeField] private bool _ragDollActive = false;
-
+    public GameController Controller;
     private Rigidbody _rb => GetComponent<Rigidbody>();
     [SerializeField] private float _launchStrength = 2;
     [SerializeField] private Rigidbody _ragdollTorso;
@@ -23,6 +22,20 @@ public class EnableRagdoll : MonoBehaviour
     private float pingpongMultTemp = 0;
     [SerializeField] private float pingpongMult;
     [SerializeField] private float pingpongDir;
+
+    public Transform RagDollTorso => _ragdollTorso.transform;
+    public System.Action<float> onPowerSet;
+    public System.Action<float> onDirSet;
+
+    public void OnPowerSet(float a)
+    {
+        onPowerSet?.Invoke(a);
+    }
+
+    public void OnDirSet(float a)
+    {
+        onDirSet?.Invoke(a);
+    }
     private void Awake()
     {
         if (!_ragdollTorso)
@@ -54,13 +67,16 @@ public class EnableRagdoll : MonoBehaviour
         if (_launchStage >= 2)
             return;
         _launchDir.y = Mathf.Clamp(_launchDir.y +Input.GetAxis("Horizontal"), -45, 45);
+        OnDirSet((_launchDir.y/90)+0.5f);
+        Controller.Arrow.localEulerAngles = new Vector3(90,0,-_launchDir.y);
         if (Input.GetButton("Fire1"))
         {
             pingpongMult = Mathf.Clamp(pingpongMult + Time.deltaTime * 2, 0, _maxLauncherSpeed);
+            OnPowerSet((pingpongMult/_maxLauncherSpeed));
             if (pingpongMult >= _maxLauncherSpeed)
             {
                 pingpongMult = _maxLauncherSpeed;
-                
+                Controller.Arrow.gameObject.SetActive(false);
                 _ragDollActive = true;
                 _launchStage = 2;
             }
@@ -69,9 +85,8 @@ public class EnableRagdoll : MonoBehaviour
         {
             _ragDollActive = true;
             _launchStage = 2;
+            Controller.Arrow.gameObject.SetActive(false);
         }
-
-        
         
         if (_ragDollActive && _ragdollTorso)
         {
@@ -86,36 +101,6 @@ public class EnableRagdoll : MonoBehaviour
                 rb.isKinematic = false;
                 rb.useGravity = true;
             }
-        }
-    }
-    
-    void OriginalLauncherCode()
-    {
-        if (_launchStage == 0)
-            pingpongMult = Mathf.PingPong(Time.time * 100, 50);
-        if (_launchStage == 1)
-            pingpongDir = Mathf.Lerp (-45, 45, Mathf.PingPong(Time.time, 1));
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            switch (_launchStage)
-            {
-                case 0: _launchMult = pingpongMult;
-                    _launchStage++;
-                    break;
-                case 1:
-                    _launchDir.y = pingpongDir;
-                    _launchStage++;
-                    break;
-                
-                case 2: _ragDollActive = true;
-                    _launchStage++;
-                    break;
-                default:
-                    _launchStage = 4;
-                    break;
-            }
-            
         }
     }
 }

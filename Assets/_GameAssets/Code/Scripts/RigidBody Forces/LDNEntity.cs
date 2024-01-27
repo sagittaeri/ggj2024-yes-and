@@ -105,6 +105,8 @@ public class LDNEntity : MonoBehaviour
                 
                 rb.isKinematic = false;
                 rb.useGravity = true;
+
+                TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Bang);
             }
         }
     }

@@ -33,9 +33,13 @@ public class GachaCapsuleRandomiser : MonoBehaviour
     private Vector3 topAngle;
     private Vector3 bottomAngle;
     private bool contentLeft;
+    private bool initialised;
 
     void Awake()
     {
+        if (initialised)
+            return;
+        initialised = true;
         if (breakRoot != null)
             breakRoot.gameObject.SetActive(false);
         if (breakableTopHalf != null)
@@ -48,7 +52,7 @@ public class GachaCapsuleRandomiser : MonoBehaviour
             bottomPos = breakableBottomHalf.localPosition;
             bottomAngle = breakableBottomHalf.localEulerAngles;
         }
-        Randomise();
+        // Randomise();
     }
 
     void Update()
@@ -70,6 +74,10 @@ public class GachaCapsuleRandomiser : MonoBehaviour
 
     public string Randomise()
     {
+        gameObject.SetActive(true);
+        if (!initialised)
+            Awake();
+        gameObject.SetActive(false);
         if (contentList == null  || contentList.Length == 0)
             return null;
         if (content != null)
@@ -108,8 +116,11 @@ public class GachaCapsuleRandomiser : MonoBehaviour
         enclosure.DOScaleY(0.8f, 0.3f).SetEase(Ease.OutQuad).OnComplete(()=>
         {
             enclosure.DOScaleY(1f, 0.2f).SetEase(Ease.OutQuad);
-            if (breakableMid != null)
-                breakableMid.gameObject.SetActive(false);
+            DOVirtual.DelayedCall(0.1f, ()=>
+            {
+                if (breakableMid != null)
+                    breakableMid.gameObject.SetActive(false);
+            });
             if (breakableTopHalf != null)
             {
                 breakableTopHalf.DOKill();

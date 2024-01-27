@@ -15,10 +15,13 @@ public class GameController : MonoBehaviour
     public LDNEntity placeholderRef;
 
     public LauncherBarUI UIRef;
+
+    static public GameController instance;
     
     // Start is called before the first frame update
     void Awake()
     {
+        instance = this;
         _camera = Camera.main;
         // LDNEntity a = Instantiate(placeholderRef, _startPos.position, _startPos.rotation);
         // a.Controller = this;

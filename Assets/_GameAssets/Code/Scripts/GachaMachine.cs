@@ -10,6 +10,14 @@ using UnityEngine.UI;
 
 public class GachaMachine : MonoBehaviour
 {
+    public enum State
+    {
+        BeforePull,
+        Pulling,
+        Reading,
+        After,
+    }
+
     [Serializable]
     public class Person
     {
@@ -34,6 +42,7 @@ public class GachaMachine : MonoBehaviour
     private Vector3 startAngles;
     private Tween autoTween;
     private FuckWits currentFuckwit;
+    private State state = State.BeforePull;
 
     void Awake()
     {
@@ -46,10 +55,12 @@ public class GachaMachine : MonoBehaviour
 
     void Update()
     {
-        if (autoTween != null && autoTween.IsPlaying() && Input.anyKeyDown)
-        {
+        if (state == State.BeforePull && Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+        else if (state == State.BeforePull && Input.anyKeyDown)
+            RandomiseGacha();
+        else if (state == State.Reading && Input.anyKeyDown)
             ContinueToGame();
-        }
     }
 
     [Button]
@@ -88,6 +99,7 @@ public class GachaMachine : MonoBehaviour
     [Button]
     public void RandomiseGacha()
     {
+        state = State.Pulling;
         gacha.enclosure.transform.DOKill();
         gacha.effectRoot.DOKill();
         gacha.gameObject.SetActive(false);
@@ -135,6 +147,7 @@ public class GachaMachine : MonoBehaviour
                         gacha.doContentAnimate = true;
                         if (autoTween != null)
                             autoTween.Kill();
+                        state = State.Reading;
                         autoTween = DOVirtual.DelayedCall(20f, ()=>
                         {
                             ContinueToGame();
@@ -147,6 +160,7 @@ public class GachaMachine : MonoBehaviour
 
     public void ContinueToGame()
     {
+        state = State.After;
         if (autoTween != null)
             autoTween.Kill();
         autoTween = null;
@@ -157,8 +171,7 @@ public class GachaMachine : MonoBehaviour
         SceneManager.LoadScene("GameLevel", LoadSceneMode.Single);
         DOVirtual.DelayedCall(0.5f, ()=>
         {
-            GameController gameController = FindFirstObjectByType<GameController>();
-            gameController.SpawnLDNFuckwit(currentFuckwit);
+            GameController.instance.SpawnLDNFuckwit(currentFuckwit);
             Destroy(gacha.breakRoot.gameObject);
         });
     }

@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     public LDNEntity placeholderRef;
 
     public LauncherBarUI UIRef;
-
+    public Transform golf;
     static public GameController instance;
     [SerializeField] private GridTerrain terrainGenerator;
 
@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour
         terrainGenerator.player = UIRef.Entity.RagDollTorso.gameObject;
         startZ = UIRef.Entity.RagDollTorso.transform.position.z;
         UIRef.Entity.RagDollTorso.AddComponent<ColliderHandler>();
+        UIRef.Entity.golf = golf;
+        UIRef.Entity.NewRotGolf = golf.eulerAngles;
     }
 
     public void UpdateDistance()

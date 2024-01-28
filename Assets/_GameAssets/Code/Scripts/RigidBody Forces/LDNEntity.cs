@@ -25,6 +25,9 @@ public class LDNEntity : MonoBehaviour
     [SerializeField] private float pingpongMult;
     [SerializeField] private float pingpongDir;
 
+    public Transform golf;
+    public bool golfhit = false;
+    public Vector3 NewRotGolf = Vector3.zero;
     public Transform RagDollTorso => _ragdollTorso.transform;
     public System.Action<float> onPowerSet;
     public System.Action<float> onDirSet;
@@ -61,8 +64,14 @@ public class LDNEntity : MonoBehaviour
     {
         Launcher();
         GameController.instance.UpdateDistance();
+
+        if (golfhit)
+        {
+            NewRotGolf.x = 270;
+            golf.transform.eulerAngles = Vector3.Lerp(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime* _launchStrength*(1+pingpongMult));
+        }
         
-        if (_launchStage == 2)
+        if (_launchStage == 8)
         {
             if (_ragdollTorso.velocity.magnitude < 0.1f)
             {
@@ -71,7 +80,7 @@ public class LDNEntity : MonoBehaviour
                 else if (Time.timeSinceLevelLoad >= stopEndTime)
                 {
                     Debug.Log("GAME OVER");
-                    _launchStage = 3;
+                    _launchStage = 9;
                     AudioManager.instance.PlaySFX("Crash Sting");
                     AudioManager.instance.PlaySFX("cheer");
                     GameController.instance.UIRef.ShowVictory();
@@ -91,7 +100,7 @@ public class LDNEntity : MonoBehaviour
 
     void Launcher()
     {
-        if (_launchStage == 3 && Input.anyKeyDown)
+        if (_launchStage == 9 && Input.anyKeyDown)
         {
             SceneManager.LoadScene("GachaTest", LoadSceneMode.Single);
             AudioManager.instance.PlayMusic("Tune 1", 2f);  
@@ -123,37 +132,54 @@ public class LDNEntity : MonoBehaviour
             if (pingpongMult >= _maxLauncherSpeed)
             {
                 pingpongMult = _maxLauncherSpeed;
-                if (Controller)
-                    Controller.Arrow.gameObject.SetActive(false);
-                _ragDollActive = true;
+
+                //start anim
+                golfhit = true;
                 _launchStage = 2;
             }
         }
         if (Input.GetButtonUp("Fire1"))
         {
-            _ragDollActive = true;
+            //start anim
+            golfhit = true;
             _launchStage = 2;
-            if (Controller)
-                Controller.Arrow.gameObject.SetActive(false);
         }
         
-        if (_ragDollActive && _ragdollTorso)
-        {
-            foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
-            {
-                _ragDollActive = false;
-                _rb.isKinematic = true;
-                _rb.useGravity = false;
-                transform.localEulerAngles = _launchDir;
-                _ragdollTorso.AddForce((transform.forward + transform.up) * (_launchStrength*(1+pingpongMult)),ForceMode.VelocityChange);
-                
-                rb.isKinematic = false;
-                rb.useGravity = true;
+       
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_launchStage > 5)
+            return;
+        if (other.CompareTag("Golf"))
+        {
+            
+            _ragDollActive = true;
+            
+            if (Controller)
+                Controller.Arrow.gameObject.SetActive(false);
+            if (_ragDollActive && _ragdollTorso)
+            {
+                _launchStage = 8;
+                foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
+                {
+                    _ragDollActive = false;
+                    _rb.isKinematic = true;
+                    _rb.useGravity = false;
+                    transform.localEulerAngles = _launchDir;
+                    _ragdollTorso.AddForce((transform.forward + transform.up) * (_launchStrength*(1+pingpongMult)),ForceMode.VelocityChange);
+                
+                    rb.isKinematic = false;
+                    rb.useGravity = true;
+
+                }
                 TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Bang);
                 AudioManager.instance.PlayMusic("Tune 2", 0.5f);
+                PlayLaunchSFX();
             }
         }
+        
     }
 
     public void PlayLaunchSFX()

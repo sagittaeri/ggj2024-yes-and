@@ -106,5 +106,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: {x: 0, y: 0, z: 1}
-  _forceMode: 0
+  _forceMode: 2
   _speed: 100

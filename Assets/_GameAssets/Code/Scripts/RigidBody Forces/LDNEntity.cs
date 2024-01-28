@@ -176,6 +176,7 @@ public class LDNEntity : MonoBehaviour
                 //start anim
                 golfhit = true;
                 _launchStage = 2;
+                GameController.instance.cameraFollow.ReturnToNormal();
             }
         }
         if (Input.GetButtonUp("Fire1"))

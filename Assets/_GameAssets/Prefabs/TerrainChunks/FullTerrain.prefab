@@ -3452,6 +3452,8 @@ MonoBehaviour:
     frequnecy: 32
   - SpawnableObjects: {fileID: 2823579781116393201, guid: 5861be212188240f792c328396f052fa, type: 3}
     frequnecy: 16
+  - SpawnableObjects: {fileID: 5185735637964785113, guid: 7d83f53c3a8b544c08ede377f3f66851, type: 3}
+    frequnecy: 8
 --- !u!4 &8216692258036685037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1048760023084121175, guid: 11c4929c14f194e02825cb5f68dce3b0, type: 3}

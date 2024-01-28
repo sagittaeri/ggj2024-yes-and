@@ -68,7 +68,7 @@ public class LDNEntity : MonoBehaviour
         if (golfhit)
         {
             NewRotGolf.x = -90f;
-            golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*10);
+            golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*100);
         }
         
         if (_launchStage == 8)

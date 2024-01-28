@@ -68,7 +68,7 @@ public class GachaMachine : MonoBehaviour
         
         if (state == State.BeforePull && Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
-        else if (state == State.BeforePull && Input.anyKeyDown)
+        else if (state == State.BeforePull && Input.GetKeyDown(KeyCode.Space))
             RandomiseGacha();
         else if (state == State.Reading && Input.anyKeyDown)
             ContinueToGame();

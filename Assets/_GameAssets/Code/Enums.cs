@@ -30,5 +30,5 @@ public abstract class UnitySerializedDictionary<TKey, TValue> : Dictionary<TKey,
         }
     }
 }
-public enum FuckWits{Gump, Scum, Xlon}
+public enum FuckWits{Gump, Scum, Xlon, Bojo, Roney}
 

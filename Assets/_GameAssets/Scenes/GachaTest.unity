@@ -961,6 +961,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272836252}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!212 &1406359282 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7888938211123556737, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+  m_PrefabInstance: {fileID: 4548745233586297588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1445913344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,6 +1215,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3147282126548512073, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1406359282}
     - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
       propertyPath: _knob
       value: 

@@ -25,6 +25,7 @@ public class GachaMachine : MonoBehaviour
         public FuckWits fuckwit;
         public string name;
         public string description;
+        public Sprite paper;
     }
     public Person[] persons;
     
@@ -146,6 +147,7 @@ public class GachaMachine : MonoBehaviour
                         {
                             gacha.nameText.text = p.name;
                             gacha.descriptionText.text = p.description;
+                            gacha.spriteRenderer.sprite = p.paper;
                             currentFuckwit = p.fuckwit;
                             break;
                         }

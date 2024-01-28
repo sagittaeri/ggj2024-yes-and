@@ -20,6 +20,7 @@ public class GachaCapsuleRandomiser : MonoBehaviour
     public Transform paper;
     public TextMeshPro nameText;
     public TextMeshPro descriptionText;
+    public SpriteRenderer spriteRenderer;
     public GameObject[] contentList;
     public Material[] materialList;
 

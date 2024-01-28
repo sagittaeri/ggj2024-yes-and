@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -67,6 +68,7 @@ public class LDNEntity : MonoBehaviour
 
         if (golfhit)
         {
+            golf.transform.DOKill();
             NewRotGolf.x = -90f;
             golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*100);
         }
@@ -127,6 +129,9 @@ public class LDNEntity : MonoBehaviour
             AudioManager.instance.PlaySFX("aim club");
             AudioManager.instance.PlayMusic("Club Loop");
             AudioManager.instance.PlaySFX("Pap_golf_prime");
+            GameController.instance.cameraFollow.PullBack();
+            golf.transform.DOKill();
+            golf.transform.DORotate(GameController.instance.golfStartAngle, 1.5f).SetEase(Ease.OutSine);
         }
 
         if (Input.GetButton("Fire1"))
@@ -147,6 +152,7 @@ public class LDNEntity : MonoBehaviour
             //start anim
             golfhit = true;
             _launchStage = 2;
+            GameController.instance.cameraFollow.ReturnToNormal();
         }
         
        

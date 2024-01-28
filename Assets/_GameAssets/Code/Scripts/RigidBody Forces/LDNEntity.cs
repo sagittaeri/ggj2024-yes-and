@@ -62,6 +62,8 @@ public class LDNEntity : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
         Launcher();
         GameController.instance.UpdateDistance();
 
@@ -70,6 +72,34 @@ public class LDNEntity : MonoBehaviour
             NewRotGolf.x = -90f;
             golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*100);
         }
+
+        if (_ragdollTorso.transform.position.y < -100)
+        {
+            _ragdollTorso.transform.position += transform.up * 100;
+            foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
+            {
+                _ragDollActive = false;
+                _rb.isKinematic = false;
+                _rb.useGravity = true;
+            
+                rb.isKinematic = true;
+                rb.useGravity = false;
+            }
+            Debug.Log("GAME OVER");
+            _launchStage = 9;
+            AudioManager.instance.PlaySFX("Crash Sting");
+            AudioManager.instance.PlaySFX("cheer");
+                   
+            GameController.instance.UIRef.ShowVictory();
+            AudioManager.instance.PlaySFX("Pap_victory_" + UnityEngine.Random.Range(1, 3).ToString());
+            
+        }
+
+        if (_ragdollTorso.transform.position.y > 300)
+        {
+            _ragdollTorso.AddForce(-transform.up);
+        }
+        
         
         if (_launchStage == 8)
         {
@@ -83,6 +113,7 @@ public class LDNEntity : MonoBehaviour
                     _launchStage = 9;
                     AudioManager.instance.PlaySFX("Crash Sting");
                     AudioManager.instance.PlaySFX("cheer");
+                   
                     GameController.instance.UIRef.ShowVictory();
                     AudioManager.instance.PlaySFX("Pap_victory_" + UnityEngine.Random.Range(1, 3).ToString());
                 }

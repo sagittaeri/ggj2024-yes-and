@@ -62,6 +62,8 @@ public class LDNEntity : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
         Launcher();
         GameController.instance.UpdateDistance();
 

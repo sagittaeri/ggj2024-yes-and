@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -926,6 +926,38 @@ PrefabInstance:
       propertyPath: _knob
       value: 
       objectReference: {fileID: 922772748}
+    - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: persons.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: persons.Array.data[3].name
+      value: Bojo Jojo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: persons.Array.data[4].name
+      value: Roney Priest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: persons.Array.data[3].fuckwit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: persons.Array.data[4].fuckwit
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: persons.Array.data[3].description
+      value: "With delusions of eloquence and a beer gut the size of his ego, Bojo
+        Jojo was the figurehead behind Britain\u2019s exit from the European Union.
+        One hopes his blue passports were worth the Remediation tonight!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245482096825195505, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
+      propertyPath: persons.Array.data[4].description
+      value: "The onion muncher himself who enabled Scum Morrison\u2019s rise to
+        power, Roney Priest didn\u2019t learn his lesson when he got called out for
+        misogyny! Let\u2019s fix that mistake tonight!"
+      objectReference: {fileID: 0}
     - target: {fileID: 3448136363933283447, guid: 9826bbae7a5ed41a99a9f296400d6f52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.58

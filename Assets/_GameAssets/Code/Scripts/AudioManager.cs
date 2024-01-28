@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
     {
         if (isDestroying)
             return;
-        PlaySFX("Intro");
+        PlaySFX("Intro", 0.4f);
         PlayMusic("Tune 1", delay: 1.8f);
     }
 
@@ -76,6 +76,7 @@ public class AudioManager : MonoBehaviour
             tween = DOVirtual.DelayedCall(delay, ()=>
             {
                 target.clip = clip;
+                target.volume = volume;
                 target.Play();
             });
         }

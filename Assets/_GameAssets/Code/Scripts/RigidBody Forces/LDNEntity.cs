@@ -35,6 +35,7 @@ public class LDNEntity : MonoBehaviour
 
     private float stopEndTime = -1f;
     private float stopDuration = 1f;
+    private bool charging;
 
     public void OnPowerSet(float a)
     {
@@ -59,6 +60,8 @@ public class LDNEntity : MonoBehaviour
             rb.isKinematic = true;
             rb.useGravity = false;
         }
+
+        charging = false;
     }
 
     void Update()
@@ -68,12 +71,12 @@ public class LDNEntity : MonoBehaviour
         Launcher();
         GameController.instance.UpdateDistance();
 
-        if (golfhit)
-        {
-            golf.transform.DOKill();
-            NewRotGolf.x = -90f;
-            golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*100);
-        }
+        // if (golfhit)
+        // {
+        //     golf.transform.DOKill();
+        //     NewRotGolf.x = -90f;
+        //     golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*100);
+        // }
 
         if (_ragdollTorso.transform.position.y < -100)
         {
@@ -157,6 +160,7 @@ public class LDNEntity : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
+            charging = true;
             AudioManager.instance.PlaySFX("aim club");
             AudioManager.instance.PlayMusic("Club Loop");
             AudioManager.instance.PlaySFX("Pap_golf_prime");
@@ -165,29 +169,33 @@ public class LDNEntity : MonoBehaviour
             golf.transform.DORotate(GameController.instance.golfStartAngle, 1.5f).SetEase(Ease.OutSine);
         }
 
-        if (Input.GetButton("Fire1"))
+        if (charging && Input.GetButton("Fire1"))
         {
             pingpongMult = Mathf.Clamp(pingpongMult + Time.deltaTime * 2, 1, _maxLauncherSpeed);
             OnPowerSet((pingpongMult/_maxLauncherSpeed));
             if (pingpongMult >= _maxLauncherSpeed)
             {
                 pingpongMult = _maxLauncherSpeed;
-
-                //start anim
-                golfhit = true;
-                _launchStage = 2;
-                GameController.instance.cameraFollow.ReturnToNormal();
+                SwingClub();
             }
         }
-        if (Input.GetButtonUp("Fire1"))
+        if (charging && Input.GetButtonUp("Fire1"))
         {
-            //start anim
-            golfhit = true;
-            _launchStage = 2;
-            GameController.instance.cameraFollow.ReturnToNormal();
+            SwingClub();
         }
         
        
+    }
+
+    private void SwingClub()
+    {
+        //start anim
+        golfhit = true;
+        _launchStage = 2;
+        GameController.instance.cameraFollow.ReturnToNormal();
+        golf.transform.DOKill();
+        NewRotGolf.x = -90f;
+        golf.transform.DORotate(NewRotGolf, 0.6f).SetEase(Ease.Linear);
     }
 
     private void OnTriggerEnter(Collider other)

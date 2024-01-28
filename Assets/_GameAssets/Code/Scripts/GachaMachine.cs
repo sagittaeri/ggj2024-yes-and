@@ -120,7 +120,7 @@ public class GachaMachine : MonoBehaviour
         playButton.interactable = false;
         _spinKnob = true;
 
-        AudioManager.instance.PlaySFX("Gacha Sting");
+        AudioManager.instance.PlaySFX("Gacha Sting", 0.4f);
         AudioManager.instance.PlaySFX("Pap_gacha_" + UnityEngine.Random.Range(1, 3).ToString());
         
         string id = gacha.Randomise();
@@ -186,8 +186,8 @@ public class GachaMachine : MonoBehaviour
         gacha.breakRoot.SetParent(null);
         Reset();
         gacha.breakRoot.gameObject.SetActive(true);
-        SceneManager.LoadScene("GameLevel", LoadSceneMode.Single);
         AudioManager.instance.PlayMusic("Tune 1", 2f);
+        SceneManager.LoadScene("GameLevel", LoadSceneMode.Single);
         DOVirtual.DelayedCall(0.5f, ()=>
         {
             GameController.instance.SpawnLDNFuckwit(currentFuckwit);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class LDNEntity : MonoBehaviour
@@ -30,6 +31,9 @@ public class LDNEntity : MonoBehaviour
     public Transform RagDollTorso => _ragdollTorso.transform;
     public System.Action<float> onPowerSet;
     public System.Action<float> onDirSet;
+
+    private float stopEndTime = -1f;
+    private float stopDuration = 1f;
 
     public void OnPowerSet(float a)
     {
@@ -67,12 +71,26 @@ public class LDNEntity : MonoBehaviour
             golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*100);
         }
         
-        if (_ragdollTorso.velocity.magnitude < 0.1f)
-            Debug.Log("Stopped");
-        //Steering.
-        if (_ragdollTorso.velocity.magnitude > 5)
-            _ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);
-
+        if (_launchStage == 8)
+        {
+            if (_ragdollTorso.velocity.magnitude < 0.1f)
+            {
+                if (stopEndTime < 0f)
+                    stopEndTime = Time.timeSinceLevelLoad + stopDuration;
+                else if (Time.timeSinceLevelLoad >= stopEndTime)
+                {
+                    Debug.Log("GAME OVER");
+                    _launchStage = 9;
+                    AudioManager.instance.PlaySFX("Crash Sting");
+                    AudioManager.instance.PlaySFX("cheer");
+                    GameController.instance.UIRef.ShowVictory();
+                }
+            }
+            else
+                stopEndTime = -1f;
+            if (_ragdollTorso.velocity.magnitude > 5)
+                _ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);
+        }
     }
 
 
@@ -83,6 +101,12 @@ public class LDNEntity : MonoBehaviour
 
     void Launcher()
     {
+        if (_launchStage == 9 && Input.anyKeyDown)
+        {
+            SceneManager.LoadScene("GachaTest", LoadSceneMode.Single);
+            AudioManager.instance.PlayMusic("Tune 1", 2f);  
+            return;          
+        }
         if (_launchStage >= 2)
             return;
         _launchDir.y = Mathf.Clamp(_launchDir.y +Input.GetAxis("Horizontal")/2, -45, 45);
@@ -153,8 +177,14 @@ public class LDNEntity : MonoBehaviour
                 }
                 TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Bang);
                 AudioManager.instance.PlayMusic("Tune 2", 0.5f);
+                PlayLaunchSFX();
             }
         }
         
+    }
+
+    public void PlayLaunchSFX()
+    {
+        AudioManager.instance.PlaySFX("Club Impact");
     }
 }

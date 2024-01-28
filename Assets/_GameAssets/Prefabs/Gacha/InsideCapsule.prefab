@@ -123,7 +123,6 @@ MonoBehaviour:
   - {fileID: 5085726539045440150, guid: bd1369526d4624ae194bffc1e5339bfb, type: 3}
   - {fileID: 5085726539045440150, guid: b0442ba647aef4bf7ad7d377f34a431f, type: 3}
   - {fileID: 5085726539045440150, guid: 155e7a85ae58341e28306b101d51e9d6, type: 3}
-  - {fileID: 5085726539045440150, guid: b9e73490230c9406d90c1898e95b2eb4, type: 3}
   materialList:
   - {fileID: 2100000, guid: 20ac8e9d10b814f0ca005295e2212ad9, type: 2}
   - {fileID: 2100000, guid: b5060d2be17a840d99ba25a830a68f70, type: 2}
@@ -131,6 +130,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 6ab532f9dd78c47059f2f506a4d76936, type: 2}
   - {fileID: 2100000, guid: 65c9d1709222a4429b10c7bedc5aa64f, type: 2}
   - {fileID: 2100000, guid: bcb26c07743c14298bca3e55ce599f38, type: 2}
+  content: {fileID: 0}
+  doContentAnimate: 0
+  contentRotate: 37.5
 --- !u!1001 &8236232738183266899
 PrefabInstance:
   m_ObjectHideFlags: 0

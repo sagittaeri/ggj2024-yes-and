@@ -756,9 +756,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 223654992044760640}
+  - component: {fileID: 1854458143883545631}
+  - component: {fileID: 6197650963326058341}
   m_Layer: 0
   m_Name: PaperStackPile
-  m_TagString: Untagged
+  m_TagString: Woosh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,7 +775,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -31, y: 0.25, z: 142.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8831977700175420896}
@@ -783,6 +785,42 @@ Transform:
   - {fileID: 6200268516405646351}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1854458143883545631
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820373712019130009}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 34.52158, y: 14.907889, z: 35.145645}
+  m_Center: {x: -3.8335857, y: 6.9539447, z: 8.246666}
+--- !u!114 &6197650963326058341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820373712019130009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9f143e369c34819aa0554edc69c993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _direction: {x: 0, y: 1, z: 0}
+  _forceMode: 2
+  _speed: 0
 --- !u!1 &1829540501119867298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,7 +1992,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6200268516405646351}
-  - component: {fileID: 6071510351926007728}
   m_Layer: 0
   m_Name: PaperStack_1 (4)
   m_TagString: Untagged
@@ -1986,27 +2023,6 @@ Transform:
   - {fileID: 1221263218458971613}
   m_Father: {fileID: 223654992044760640}
   m_LocalEulerAnglesHint: {x: 0, y: -193.036, z: 0}
---- !u!65 &6071510351926007728
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484822020993238290}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.517189, y: 3.8712337, z: 4.5709386}
-  m_Center: {x: -0.22921672, y: 1.9181776, z: 0.5549476}
 --- !u!1 &4788409290475202296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,7 +2032,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8831977700175420896}
-  - component: {fileID: 8631408950027589394}
   m_Layer: 0
   m_Name: PaperStack_1
   m_TagString: Untagged
@@ -2048,27 +2063,6 @@ Transform:
   - {fileID: 4719575597499328907}
   m_Father: {fileID: 223654992044760640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8631408950027589394
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4788409290475202296}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.517189, y: 3.8712337, z: 4.5709386}
-  m_Center: {x: -0.22921672, y: 1.9181776, z: 0.5549476}
 --- !u!1 &4880982727073896992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,7 +2072,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1899622612024741615}
-  - component: {fileID: 6038597486919301032}
   m_Layer: 0
   m_Name: PaperStack_1 (1)
   m_TagString: Untagged
@@ -2110,27 +2103,6 @@ Transform:
   - {fileID: 7238970606376999841}
   m_Father: {fileID: 223654992044760640}
   m_LocalEulerAnglesHint: {x: 0, y: -122.844, z: 0}
---- !u!65 &6038597486919301032
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4880982727073896992}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.517189, y: 3.8712337, z: 4.5709386}
-  m_Center: {x: -0.22921672, y: 1.9181776, z: 0.5549476}
 --- !u!1 &5084249298398529581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,7 +2361,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3303717788771199206}
-  - component: {fileID: 5972892291482432906}
   m_Layer: 0
   m_Name: PaperStack_1 (2)
   m_TagString: Untagged
@@ -2421,27 +2392,6 @@ Transform:
   - {fileID: 2938919130478461816}
   m_Father: {fileID: 223654992044760640}
   m_LocalEulerAnglesHint: {x: 0, y: -239.269, z: 0}
---- !u!65 &5972892291482432906
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5693987205501701788}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.517189, y: 3.8712337, z: 4.5709386}
-  m_Center: {x: -0.22921672, y: 1.9181776, z: 0.5549476}
 --- !u!1 &5707837182983487420
 GameObject:
   m_ObjectHideFlags: 0
@@ -3198,7 +3148,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1849693937722701497}
-  - component: {fileID: 103991361414481100}
   m_Layer: 0
   m_Name: PaperStack_1 (3)
   m_TagString: Untagged
@@ -3230,27 +3179,6 @@ Transform:
   - {fileID: 5977368886997635397}
   m_Father: {fileID: 223654992044760640}
   m_LocalEulerAnglesHint: {x: 0, y: -194.543, z: 0}
---- !u!65 &103991361414481100
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7435018089825985135}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.517189, y: 3.8712337, z: 4.5709386}
-  m_Center: {x: -0.22921672, y: 1.9181776, z: 0.5549476}
 --- !u!1 &7516082537241075874
 GameObject:
   m_ObjectHideFlags: 0

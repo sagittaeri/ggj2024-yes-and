@@ -67,8 +67,8 @@ public class LDNEntity : MonoBehaviour
 
         if (golfhit)
         {
-            NewRotGolf.x = 270;
-            golf.transform.eulerAngles = Vector3.Lerp(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime* _launchStrength*(1+pingpongMult));
+            NewRotGolf.x = -90f;
+            golf.transform.eulerAngles = Vector3.MoveTowards(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime*10);
         }
         
         if (_launchStage == 8)
@@ -88,7 +88,8 @@ public class LDNEntity : MonoBehaviour
             }
             else
                 stopEndTime = -1f;
-            _ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);
+            if (_ragdollTorso.velocity.magnitude > 5)
+                _ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);
         }
     }
 

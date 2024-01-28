@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3323115340311760154}
   - component: {fileID: 4336608230647993470}
   m_Layer: 5
-  m_Name: DistanceText (3)
+  m_Name: Hold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.000061035156, y: 15}
+  m_AnchoredPosition: {x: 41, y: 14.099976}
   m_SizeDelta: {x: 411.5, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3323115340311760154
@@ -226,9 +226,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hold Left Mouse
+  m_text: 'Hold
 
-    Button Down'
+    Spacebar'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 864f76fbc71224f35a6b23659e19667e, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 864f76fbc71224f35a6b23659e19667e, type: 2}
@@ -365,12 +365,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7565689095659823570}
+  - {fileID: 2972518650012242301}
+  - {fileID: 3816892510758020913}
   m_Father: {fileID: 557887940220399665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 27}
-  m_SizeDelta: {x: 507.3, y: 45.71}
+  m_SizeDelta: {x: 507.30005, y: 45.71}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5003230215754151630
 CanvasRenderer:
@@ -571,8 +573,6 @@ RectTransform:
   - {fileID: 7361634508803115633}
   - {fileID: 3906901650476862364}
   - {fileID: 6169632101551161783}
-  - {fileID: 2972518650012242301}
-  - {fileID: 3816892510758020913}
   - {fileID: 8567918559964549177}
   m_Father: {fileID: 3690529097914791921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 213365354665707064}
   - component: {fileID: 3074703214712065283}
   m_Layer: 5
-  m_Name: DistanceText (2)
+  m_Name: D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -689,16 +689,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4118077739248875983}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5919261, y: 0.5919261, z: 0.5919261}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 557887940220399665}
+  m_Father: {fileID: 300513932955314004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 527, y: 15}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 253.5, y: 22.9}
   m_SizeDelta: {x: 87.900024, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &213365354665707064
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1033,6 +1033,7 @@ MonoBehaviour:
   UIRef: {fileID: 1648952276022566858}
   golf: {fileID: 2479054840388451557}
   terrainGenerator: {fileID: 6245520096671656789}
+  cameraFollow: {fileID: 0}
 --- !u!114 &6245520096671656789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,7 +1060,7 @@ GameObject:
   - component: {fileID: 4063747524594157061}
   - component: {fileID: 7002148867634232298}
   m_Layer: 5
-  m_Name: DistanceText (1)
+  m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1072,16 +1073,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6358461857993325060}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5919261, y: 0.5919261, z: 0.5919261}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 557887940220399665}
+  m_Father: {fileID: 300513932955314004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -525, y: 5.999878}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -253.7, y: 22.9}
   m_SizeDelta: {x: 87.900024, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4063747524594157061
@@ -1147,7 +1148,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

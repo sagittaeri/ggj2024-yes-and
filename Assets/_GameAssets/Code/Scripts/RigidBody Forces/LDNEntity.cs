@@ -105,7 +105,7 @@ public class LDNEntity : MonoBehaviour
         
         if (_launchStage == 8)
         {
-            if (_ragdollTorso.velocity.magnitude < 0.1f)
+            if (_ragdollTorso.velocity.magnitude < 1f)
             {
                 if (stopEndTime < 0f)
                     stopEndTime = Time.timeSinceLevelLoad + stopDuration;

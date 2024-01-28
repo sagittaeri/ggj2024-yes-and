@@ -5513,6 +5513,10 @@ PrefabInstance:
       propertyPath: golf
       value: 
       objectReference: {fileID: 1030326458}
+    - target: {fileID: 1685029844012938892, guid: a48b88a0c700f49589d920f1995da46c, type: 3}
+      propertyPath: FuckWits.valueData.Array.data[3]
+      value: 
+      objectReference: {fileID: 7449162028555181540, guid: 0087288f0ad614fb8a80bb6cb6df760c, type: 3}
     - target: {fileID: 2274880093735948371, guid: a48b88a0c700f49589d920f1995da46c, type: 3}
       propertyPath: _player
       value: 

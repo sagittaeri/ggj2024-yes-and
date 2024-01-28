@@ -730,13 +730,16 @@ MonoBehaviour:
   Controller: {fileID: 0}
   _launchStrength: 2
   _ragdollTorso: {fileID: 7990637909887144283}
-  _forceType: 0
-  _nudgeAmount: 0.5
+  _forceType: 1
+  _nudgeAmount: 2.5
   _launchMult: 1
   _launchDir: {x: 0, y: 0, z: 0}
   _maxLauncherSpeed: 8
   pingpongMult: 0
   pingpongDir: 0
+  golf: {fileID: 0}
+  golfhit: 0
+  NewRotGolf: {x: 0, y: 0, z: 0}
 --- !u!136 &8925284725773560638
 CapsuleCollider:
   m_ObjectHideFlags: 0

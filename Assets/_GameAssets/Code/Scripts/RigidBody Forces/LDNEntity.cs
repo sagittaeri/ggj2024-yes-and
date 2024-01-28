@@ -84,6 +84,7 @@ public class LDNEntity : MonoBehaviour
                     AudioManager.instance.PlaySFX("Crash Sting");
                     AudioManager.instance.PlaySFX("cheer");
                     GameController.instance.UIRef.ShowVictory();
+                    AudioManager.instance.PlaySFX("Pap_victory_" + UnityEngine.Random.Range(1, 3).ToString());
                 }
             }
             else
@@ -105,6 +106,7 @@ public class LDNEntity : MonoBehaviour
         {
             SceneManager.LoadScene("GachaTest", LoadSceneMode.Single);
             AudioManager.instance.PlayMusic("Tune 1", 2f);  
+            AudioManager.instance.PlaySFX("Pap_back_to_main_menu");
             return;          
         }
         if (_launchStage >= 2)
@@ -124,6 +126,7 @@ public class LDNEntity : MonoBehaviour
         {
             AudioManager.instance.PlaySFX("aim club");
             AudioManager.instance.PlayMusic("Club Loop");
+            AudioManager.instance.PlaySFX("Pap_golf_prime");
         }
 
         if (Input.GetButton("Fire1"))

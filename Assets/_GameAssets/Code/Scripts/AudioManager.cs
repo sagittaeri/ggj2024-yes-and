@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
         PlayMusic("Tune 1", delay: 1.8f);
     }
 
-    public void PlayMusic(string name, float crossfadeDuration = 2f, float volume = 1f, float delay = 0f)
+    public void PlayMusic(string name, float crossfadeDuration = 2f, float volume = 0.4f, float delay = 0f)
     {
         if (!musicDict.ContainsKey(name))
             return;

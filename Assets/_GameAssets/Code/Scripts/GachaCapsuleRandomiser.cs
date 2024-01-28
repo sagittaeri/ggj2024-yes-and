@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-using System.Threading;
+using Sirenix.OdinInspector;
 
 public class GachaCapsuleRandomiser : MonoBehaviour
 {
@@ -109,6 +109,23 @@ public class GachaCapsuleRandomiser : MonoBehaviour
         if (breakableMid != null)
             breakableMid.gameObject.SetActive(true);
         return chosenOne.name;
+    }
+
+    [Button]
+    public void RandomiseOffline()
+    {
+        if (contentList == null  || contentList.Length == 0)
+            return;
+        if (content != null)
+            Destroy(content);
+        int chosenIndex = Random.Range(0, contentList.Length);
+        bottomRenderer.material = materialList[chosenIndex];
+
+        GameObject chosenOne = contentList[chosenIndex];
+        content = Instantiate(chosenOne, enclosure);
+        content.transform.localPosition = Vector3.zero;
+        content.transform.localEulerAngles = Vector3.zero;
+        return;
     }
 
     public void BreakOpen()

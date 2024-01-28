@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 
 public class GameController : MonoBehaviour
@@ -19,6 +21,9 @@ public class GameController : MonoBehaviour
     public Transform golf;
     static public GameController instance;
     [SerializeField] private GridTerrain terrainGenerator;
+    [NonSerialized] public Vector3 golfStartAngle;
+
+    public CameraFollowScript cameraFollow;
 
     float startZ;
     
@@ -32,6 +37,7 @@ public class GameController : MonoBehaviour
         // UIRef.Entity = a;
         
         // _camera.GetComponent<CameraFollowScript>().Player = a.RagDollTorso;
+        golfStartAngle = golf.transform.eulerAngles;
     }
 
     public void SpawnLDNFuckwit(FuckWits oxygenThief)
@@ -41,13 +47,16 @@ public class GameController : MonoBehaviour
         
         UIRef.Entity = a.GetComponent<LDNEntity>();
         UIRef.Entity.Controller = this;
-        _camera.GetComponent<CameraFollowScript>().Player = UIRef.Entity.RagDollTorso;
+        cameraFollow = _camera.GetComponent<CameraFollowScript>();
+        cameraFollow.Player = UIRef.Entity.RagDollTorso;
         UIRef.Init(UIRef.Entity);
         terrainGenerator.player = UIRef.Entity.RagDollTorso.gameObject;
         startZ = UIRef.Entity.RagDollTorso.transform.position.z;
         UIRef.Entity.RagDollTorso.AddComponent<ColliderHandler>();
         UIRef.Entity.golf = golf;
         UIRef.Entity.NewRotGolf = golf.eulerAngles;
+        golf.transform.DOKill();
+        golf.transform.eulerAngles = UIRef.Entity.NewRotGolf;
     }
 
     public void UpdateDistance()

@@ -118,6 +118,8 @@ public class GachaMachine : MonoBehaviour
         gacha.doContentAnimate = false;
         playButton.interactable = false;
         _spinKnob = true;
+
+        AudioManager.instance.PlaySFX("Gacha Sting");
         
         
         string id = gacha.Randomise();
@@ -160,6 +162,7 @@ public class GachaMachine : MonoBehaviour
                         gacha.doContentAnimate = true;
                         if (autoTween != null)
                             autoTween.Kill();
+                        AudioManager.instance.PlayMusic("Tune 2", 0.5f);
                         state = State.Reading;
                         autoTween = DOVirtual.DelayedCall(20f, ()=>
                         {
@@ -182,6 +185,7 @@ public class GachaMachine : MonoBehaviour
         Reset();
         gacha.breakRoot.gameObject.SetActive(true);
         SceneManager.LoadScene("GameLevel", LoadSceneMode.Single);
+        AudioManager.instance.PlayMusic("Tune 1", 2f);
         DOVirtual.DelayedCall(0.5f, ()=>
         {
             GameController.instance.SpawnLDNFuckwit(currentFuckwit);

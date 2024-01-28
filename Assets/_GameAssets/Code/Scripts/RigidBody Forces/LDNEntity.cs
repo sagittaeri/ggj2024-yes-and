@@ -82,6 +82,17 @@ public class LDNEntity : MonoBehaviour
         if (Controller)
             Controller.Arrow.localEulerAngles = new Vector3(90,0,-_launchDir.y);
         
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            AudioManager.instance.PlaySFX("aim left");
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            AudioManager.instance.PlaySFX("aim club");
+            AudioManager.instance.PlayMusic("Club Loop");
+        }
+
         if (Input.GetButton("Fire1"))
         {
             pingpongMult = Mathf.Clamp(pingpongMult + Time.deltaTime * 2, 0, _maxLauncherSpeed);
@@ -117,6 +128,7 @@ public class LDNEntity : MonoBehaviour
                 rb.useGravity = true;
 
                 TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Bang);
+                AudioManager.instance.PlayMusic("Tune 2", 0.5f);
             }
         }
     }

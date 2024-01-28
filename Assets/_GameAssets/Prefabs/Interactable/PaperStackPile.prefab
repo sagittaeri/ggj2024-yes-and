@@ -757,7 +757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 223654992044760640}
   - component: {fileID: 1854458143883545631}
-  - component: {fileID: 6197650963326058341}
+  - component: {fileID: 5581811134002101639}
   m_Layer: 0
   m_Name: PaperStackPile
   m_TagString: Woosh
@@ -806,7 +806,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 34.52158, y: 14.907889, z: 35.145645}
   m_Center: {x: -3.8335857, y: 6.9539447, z: 8.246666}
---- !u!114 &6197650963326058341
+--- !u!114 &5581811134002101639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -815,12 +815,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1820373712019130009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9f143e369c34819aa0554edc69c993, type: 3}
+  m_Script: {fileID: 11500000, guid: e6d3c0422398e482daee8da955259bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _direction: {x: 0, y: 1, z: 0}
-  _forceMode: 2
-  _speed: 0
 --- !u!1 &1829540501119867298
 GameObject:
   m_ObjectHideFlags: 0

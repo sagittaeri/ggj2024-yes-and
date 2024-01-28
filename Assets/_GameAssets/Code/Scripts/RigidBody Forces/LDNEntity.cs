@@ -24,6 +24,9 @@ public class LDNEntity : MonoBehaviour
     [SerializeField] private float pingpongMult;
     [SerializeField] private float pingpongDir;
 
+    public Transform golf;
+    public bool golfhit = false;
+    public Vector3 NewRotGolf = Vector3.zero;
     public Transform RagDollTorso => _ragdollTorso.transform;
     public System.Action<float> onPowerSet;
     public System.Action<float> onDirSet;
@@ -58,6 +61,11 @@ public class LDNEntity : MonoBehaviour
         Launcher();
         GameController.instance.UpdateDistance();
 
+        if (golfhit)
+        {
+            NewRotGolf.x = 270;
+            golf.transform.eulerAngles = Vector3.Lerp(golf.transform.eulerAngles,NewRotGolf,Time.deltaTime* _launchStrength*(1+pingpongMult));
+        }
         
         if (_ragdollTorso.velocity.magnitude < 0.1f)
             Debug.Log("Stopped");
@@ -100,36 +108,52 @@ public class LDNEntity : MonoBehaviour
             if (pingpongMult >= _maxLauncherSpeed)
             {
                 pingpongMult = _maxLauncherSpeed;
-                if (Controller)
-                    Controller.Arrow.gameObject.SetActive(false);
-                _ragDollActive = true;
+
+                //start anim
+                golfhit = true;
                 _launchStage = 2;
             }
         }
         if (Input.GetButtonUp("Fire1"))
         {
-            _ragDollActive = true;
+            //start anim
+            golfhit = true;
             _launchStage = 2;
-            if (Controller)
-                Controller.Arrow.gameObject.SetActive(false);
         }
         
-        if (_ragDollActive && _ragdollTorso)
-        {
-            foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
-            {
-                _ragDollActive = false;
-                _rb.isKinematic = true;
-                _rb.useGravity = false;
-                transform.localEulerAngles = _launchDir;
-                _ragdollTorso.AddForce((transform.forward + transform.up) * (_launchStrength*(1+pingpongMult)),ForceMode.VelocityChange);
-                
-                rb.isKinematic = false;
-                rb.useGravity = true;
+       
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_launchStage > 5)
+            return;
+        if (other.CompareTag("Golf"))
+        {
+            
+            _ragDollActive = true;
+            
+            if (Controller)
+                Controller.Arrow.gameObject.SetActive(false);
+            if (_ragDollActive && _ragdollTorso)
+            {
+                _launchStage = 8;
+                foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
+                {
+                    _ragDollActive = false;
+                    _rb.isKinematic = true;
+                    _rb.useGravity = false;
+                    transform.localEulerAngles = _launchDir;
+                    _ragdollTorso.AddForce((transform.forward + transform.up) * (_launchStrength*(1+pingpongMult)),ForceMode.VelocityChange);
+                
+                    rb.isKinematic = false;
+                    rb.useGravity = true;
+
+                }
                 TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Bang);
                 AudioManager.instance.PlayMusic("Tune 2", 0.5f);
             }
         }
+        
     }
 }

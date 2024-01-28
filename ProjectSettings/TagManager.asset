@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Agent
   - Ground
+  - Woosh
+  - Sizzle
+  - Thump
+  - Splat
+  - Vroom
+  - Bang
   layers:
   - Default
   - TransparentFX

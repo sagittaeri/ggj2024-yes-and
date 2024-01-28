@@ -17,7 +17,7 @@ public class TileSpawnablePrefabs : MonoBehaviour
         {
             for (int i = 0; i < a.frequnecy; i++)
             {
-                Vector3 random = new Vector3(Random.Range(0,-1080), 0, Random.Range(0, -100));
+                Vector3 random = new Vector3(Random.Range(0,-1080), 0, Random.Range(-32, -132));
                 Instantiate(a.SpawnableObjects, transform.TransformPoint(random), a.SpawnableObjects.transform.rotation);
             }
         }

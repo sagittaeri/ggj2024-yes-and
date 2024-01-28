@@ -9,7 +9,7 @@ public class LDNEntity : MonoBehaviour
     [SerializeField] private bool _ragDollActive = false;
     public GameController Controller;
     private Rigidbody _rb => GetComponent<Rigidbody>();
-    [SerializeField] private float _launchStrength = 2;
+    [SerializeField] private float _launchStrength = 100;
     [SerializeField] private Rigidbody _ragdollTorso;
     [SerializeField] private ForceMode _forceType;
     [SerializeField] private float _nudgeAmount = 0.5f;
@@ -62,7 +62,7 @@ public class LDNEntity : MonoBehaviour
         if (_ragdollTorso.velocity.magnitude < 0.1f)
             Debug.Log("Stopped");
         //Steering.
-        /*_ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);*/
+        _ragdollTorso.AddForce(transform.right * _nudgeAmount * Input.GetAxis("Horizontal"),_forceType);
 
     }
 
@@ -84,7 +84,7 @@ public class LDNEntity : MonoBehaviour
         
         if (Input.GetButton("Fire1"))
         {
-            pingpongMult = Mathf.Clamp(pingpongMult + Time.deltaTime * 2, 0, _maxLauncherSpeed);
+            pingpongMult = Mathf.Clamp(pingpongMult + Time.deltaTime * 2, 1, _maxLauncherSpeed);
             OnPowerSet((pingpongMult/_maxLauncherSpeed));
             if (pingpongMult >= _maxLauncherSpeed)
             {
@@ -111,7 +111,7 @@ public class LDNEntity : MonoBehaviour
                 _rb.isKinematic = true;
                 _rb.useGravity = false;
                 transform.localEulerAngles = _launchDir;
-                _ragdollTorso.AddForce((transform.forward + transform.up) * (_launchStrength*pingpongMult),ForceMode.VelocityChange);
+                _ragdollTorso.AddForce((transform.forward + transform.up) * (_launchStrength*(1+pingpongMult)),ForceMode.VelocityChange);
                 
                 rb.isKinematic = false;
                 rb.useGravity = true;

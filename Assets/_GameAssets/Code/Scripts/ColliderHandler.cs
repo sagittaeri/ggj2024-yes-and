@@ -23,5 +23,31 @@ public class ColliderHandler : MonoBehaviour
         {
             TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Thump);
         }
+        if (tagName == "Woosh")
+        {
+            TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Whoosh);
+        }
+        if (tagName == "Sizzle")
+        {
+            TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Sizzle);
+        }
+        
+        if (tagName == "Thump")
+        {
+            TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Thump);
+        }
+        if (tagName == "Splat")
+        {
+            TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Splat);
+        }
+        if (tagName == "Vroom")
+        {
+            TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Vroom);
+        }
+        if (tagName == "Bang")
+        {
+            TextEffectManager.instance.CreateEffect(TextEffectManager.AnimStyle.Bang);
+        }
+        
     }
 }

@@ -121,7 +121,7 @@ public class GachaMachine : MonoBehaviour
         _spinKnob = true;
 
         AudioManager.instance.PlaySFX("Gacha Sting");
-        
+        AudioManager.instance.PlaySFX("Pap_gacha_" + UnityEngine.Random.Range(1, 3).ToString());
         
         string id = gacha.Randomise();
         StartVibrating();

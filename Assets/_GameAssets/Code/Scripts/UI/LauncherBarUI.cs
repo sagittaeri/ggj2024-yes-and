@@ -8,6 +8,9 @@ using TMPro;
 public class LauncherBarUI : MonoBehaviour
 {
     public TextMeshProUGUI distanceText;
+    public TextMeshProUGUI distanceText2;
+    public GameObject victoryScreen;
+    public Transform starTransform;
 
     [SerializeField] private Scrollbar _dirLaunch;
     [SerializeField] private Image _powerBar;
@@ -18,10 +21,26 @@ public class LauncherBarUI : MonoBehaviour
         set => entity = value;
     }
 
+    private float timeRotate = -1f;
+    public float breakRotateInterval = 0.5f;
+
     void Awake()
     {
         gameObject.SetActive(false);
         SetDistanceText(0f);
+        victoryScreen.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (starTransform.gameObject.activeInHierarchy)
+        {
+            if (timeRotate < Time.timeSinceLevelLoad)
+            {
+                timeRotate = Time.timeSinceLevelLoad + breakRotateInterval;
+                starTransform.localEulerAngles = new Vector3(0f, 0f, UnityEngine.Random.Range(0f, 360f));
+            }
+        }
     }
 
     private void OnDisable()
@@ -55,5 +74,11 @@ public class LauncherBarUI : MonoBehaviour
     public void SetDistanceText(float dist)
     {
         distanceText.text = $"{dist:n0}m";
+        distanceText2.text = $"{dist:n0}m";
+    }
+
+    public void ShowVictory()
+    {
+        victoryScreen.SetActive(true);
     }
 }

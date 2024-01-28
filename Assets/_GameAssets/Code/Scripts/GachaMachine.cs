@@ -45,7 +45,7 @@ public class GachaMachine : MonoBehaviour
     private Vector3 startAngles;
     private Tween autoTween;
     private FuckWits currentFuckwit;
-    private State state = State.BeforePull;
+    public State state = State.BeforePull;
 
     void Awake()
     {

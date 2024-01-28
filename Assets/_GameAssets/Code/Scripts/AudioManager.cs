@@ -20,11 +20,19 @@ public class AudioManager : MonoBehaviour
     private Dictionary<string, AudioClip> sfxDict = new Dictionary<string, AudioClip>();
 
     private bool isMusicOne;
+    private bool isDestroying;
+    private Tween tween;
 
     static public AudioManager instance;
 
     void Awake()
     {
+        if (instance != null)
+        {
+            isDestroying = true;
+            Destroy(gameObject);
+            return;         
+        }
         instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -38,6 +46,8 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+        if (isDestroying)
+            return;
         PlaySFX("Intro");
         PlayMusic("Tune 1", delay: 1.8f);
     }
@@ -58,11 +68,12 @@ public class AudioManager : MonoBehaviour
         target.DOKill();
         if (current != null)
             current.DOKill();
+        tween?.Kill();
 
         isMusicOne = !isMusicOne;
         if (current == null)
         {
-            DOVirtual.DelayedCall(delay, ()=>
+            tween = DOVirtual.DelayedCall(delay, ()=>
             {
                 target.clip = clip;
                 target.Play();
@@ -70,7 +81,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            DOVirtual.DelayedCall(delay, ()=>
+            tween = DOVirtual.DelayedCall(delay, ()=>
             {
                 current.DOFade(0f, crossfadeDuration).OnComplete(()=>
                 {
